@@ -82,18 +82,18 @@
   #define Z_CS_PIN         PD10
 #endif
 
-#define Z2_STEP_PIN        PC13
+/*#define Z2_STEP_PIN        PC13
 #define Z2_DIR_PIN         PC14
 #define Z2_ENABLE_PIN      PC15
 #ifndef Z_CS_PIN
   #define Z_CS_PIN         PD5
 #endif
-
-#define E0_STEP_PIN        PB1
-#define E0_DIR_PIN         PB2
-#define E0_ENABLE_PIN      PE11
+*/
+#define E0_STEP_PIN        PF3
+#define E0_DIR_PIN         PF15
+#define E0_ENABLE_PIN      PE15
 #ifndef E0_CS_PIN
-  #define E0_CS_PIN         PD5
+  #define E0_CS_PIN         PE14
 #endif
 
 #if ENABLED(TOUCH_BUTTONS)
@@ -146,7 +146,7 @@
 // Heaters / Fans
 //
 #define HEATER_0_PIN       PD15
-#define HEATER_1_PIN       PD14
+//#define HEATER_1_PIN       PD14
 #define HEATER_BED_PIN     PF6
 
 #ifndef FAN_PIN
@@ -176,8 +176,8 @@
 // Servos
 //
 
-#define SERVO0_PIN         PE13
-#define SERVO1_PIN         PE14
+//#define SERVO0_PIN         PE13
+//#define SERVO1_PIN         PE14
 
 
 #define SDSS               PA8

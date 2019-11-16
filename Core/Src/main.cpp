@@ -211,8 +211,9 @@ void SystemClock_Config(void)
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 4;
@@ -242,9 +243,8 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_CLK48;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3;
   PeriphClkInitStruct.Usart3ClockSelection = RCC_USART3CLKSOURCE_PCLK1;
-  PeriphClkInitStruct.Clk48ClockSelection = RCC_CLK48SOURCE_PLL;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -586,14 +586,16 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOF, DRV_Y_CS_Pin|DRV_Z1_STEP_Pin|DRV_X_STEP_Pin|DRV_X_EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOF, E0_STEP_Pin|DRV_Y_CS_Pin|DRV_Z1_STEP_Pin|DRV_X_STEP_Pin 
+                          |DRV_X_EN_Pin|E0_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOG, LCD_DC_Pin|DRV_Z1_EN_Pin|DRV_Y_EN_Pin|DRV_Y_STEP_Pin 
                           |TOUCH_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, DRV_X_DIR_Pin|DRV_Z1_DIR_Pin|DRV_Y_DIR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, DRV_X_DIR_Pin|DRV_Z1_DIR_Pin|E0_CS_Pin|E0_EN_Pin 
+                          |DRV_Y_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, DRV_Z1_CS_Pin|DRV_X_CS_Pin|LCD_CS_Pin|LCD_RESET_Pin, GPIO_PIN_RESET);
@@ -607,8 +609,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DRV_Y_CS_Pin DRV_Z1_STEP_Pin DRV_X_STEP_Pin DRV_X_EN_Pin */
-  GPIO_InitStruct.Pin = DRV_Y_CS_Pin|DRV_Z1_STEP_Pin|DRV_X_STEP_Pin|DRV_X_EN_Pin;
+  /*Configure GPIO pins : E0_STEP_Pin DRV_Y_CS_Pin DRV_Z1_STEP_Pin DRV_X_STEP_Pin 
+                           DRV_X_EN_Pin E0_DIR_Pin */
+  GPIO_InitStruct.Pin = E0_STEP_Pin|DRV_Y_CS_Pin|DRV_Z1_STEP_Pin|DRV_X_STEP_Pin 
+                          |DRV_X_EN_Pin|E0_DIR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -623,12 +627,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DRV_X_DIR_Pin DRV_Z1_DIR_Pin DRV_Y_DIR_Pin */
-  GPIO_InitStruct.Pin = DRV_X_DIR_Pin|DRV_Z1_DIR_Pin|DRV_Y_DIR_Pin;
+  /*Configure GPIO pins : DRV_X_DIR_Pin DRV_Z1_DIR_Pin E0_EN_Pin DRV_Y_DIR_Pin */
+  GPIO_InitStruct.Pin = DRV_X_DIR_Pin|DRV_Z1_DIR_Pin|E0_EN_Pin|DRV_Y_DIR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : E0_CS_Pin */
+  GPIO_InitStruct.Pin = E0_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(E0_CS_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DRV_Z1_CS_Pin DRV_X_CS_Pin LCD_CS_Pin LCD_RESET_Pin */
   GPIO_InitStruct.Pin = DRV_Z1_CS_Pin|DRV_X_CS_Pin|LCD_CS_Pin|LCD_RESET_Pin;

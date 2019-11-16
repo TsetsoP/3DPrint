@@ -58,6 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define E0_STEP_Pin GPIO_PIN_3
+#define E0_STEP_GPIO_Port GPIOF
 #define DRV_Y_CS_Pin GPIO_PIN_11
 #define DRV_Y_CS_GPIO_Port GPIOF
 #define DRV_Z1_STEP_Pin GPIO_PIN_12
@@ -66,12 +68,18 @@ void Error_Handler(void);
 #define DRV_X_STEP_GPIO_Port GPIOF
 #define DRV_X_EN_Pin GPIO_PIN_14
 #define DRV_X_EN_GPIO_Port GPIOF
+#define E0_DIR_Pin GPIO_PIN_15
+#define E0_DIR_GPIO_Port GPIOF
 #define LCD_DC_Pin GPIO_PIN_0
 #define LCD_DC_GPIO_Port GPIOG
 #define DRV_X_DIR_Pin GPIO_PIN_9
 #define DRV_X_DIR_GPIO_Port GPIOE
 #define DRV_Z1_DIR_Pin GPIO_PIN_13
 #define DRV_Z1_DIR_GPIO_Port GPIOE
+#define E0_CS_Pin GPIO_PIN_14
+#define E0_CS_GPIO_Port GPIOE
+#define E0_EN_Pin GPIO_PIN_15
+#define E0_EN_GPIO_Port GPIOE
 #define DRV_Z1_CS_Pin GPIO_PIN_10
 #define DRV_Z1_CS_GPIO_Port GPIOD
 #define DRV_X_CS_Pin GPIO_PIN_14
