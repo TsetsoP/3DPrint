@@ -133,7 +133,7 @@
 // Temperature Sensors
 //
 
-#define TEMP_0_PIN         PC3   // Analog Input
+#define TEMP_0_PIN         PA2   // Analog Input
 //#define TEMP_1_PIN         PC2   // Analog Input
 //#define TEMP_2_PIN         PC1   // Analog Input
 //#define TEMP_3_PIN         PC0   // Analog Input
@@ -145,17 +145,21 @@
 //
 // Heaters / Fans
 //
-#define HEATER_0_PIN       PD15
+//#define ALFAWISE_UX0             // used for Open drain mosfets
+#define HEATER_0_INVERTING true
+#define HEATER_0_PIN       PE12
 //#define HEATER_1_PIN       PD14
 #define HEATER_BED_PIN     PF6
 
+#define FAN_INVERTING      true
+#define FAN_SOFT_PWM
 #ifndef FAN_PIN
-  #define FAN_PIN          PD13
+  #define FAN_PIN          PE10
 #endif
-#define FAN1_PIN           PA0
-#define FAN2_PIN           PA1
+//#define FAN1_PIN           PA0
+//#define FAN2_PIN           PA1
 
-#define ORIG_E0_AUTO_FAN_PIN  PA1   // Use this by NOT overriding E0_AUTO_FAN_PIN
+//#define ORIG_E0_AUTO_FAN_PIN  PA1   // Use this by NOT overriding E0_AUTO_FAN_PIN
 
 //
 // Misc. Functions
@@ -182,7 +186,7 @@
 
 #define SDSS               PA8
 #define SS_PIN             PA8
-#define LED_PIN            PA2   // Alive
+//#define LED_PIN            PA2   // Alive
 #define PS_ON_PIN          PA3
 #define KILL_PIN           -1 //PD5   // EXP2-10
 #define PWR_LOSS           PG5   // Power loss / nAC_FAULT

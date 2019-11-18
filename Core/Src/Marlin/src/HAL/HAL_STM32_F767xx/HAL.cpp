@@ -6,7 +6,6 @@
 
 HalSerialUSB usb_serial;
 HalSerialUART uart_serial;
-uint16_t HAL_adc_result;
 
 SpiStm32F7xx SPI(SPI1);
 
@@ -53,14 +52,29 @@ uint8_t HAL_get_reset_source(void) {
   return 0;
 }
 
-void HAL_adc_start_conversion(const uint8_t adc_pin)
+void Error_Handler(const char *module, HAL_StatusTypeDef *hal_error)
 {
-	HAL_adc_result = analogRead(adc_pin);
-}
+#if NUM_SERIAL > 0
+  MYSERIAL0.write(module);
+  MYSERIAL0.write(':');
 
-uint16_t HAL_adc_get_result(void)
-{
-	return HAL_adc_result;
-}
+  switch(*hal_error)
+  {
+  case HAL_ERROR:
+	  MYSERIAL0.write("Module error!");
+	  break;
+  case HAL_BUSY:
+	  MYSERIAL0.write("The module is busy!");
+	  break;
+  case HAL_TIMEOUT:
+	  MYSERIAL0.write("Module timeout!");
+	  break;
+  case HAL_OK:
+	  MYSERIAL0.write("Module OK.");
+	  break;
+  }
 
+#endif
+
+}
 #endif

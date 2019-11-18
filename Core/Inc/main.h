@@ -74,6 +74,10 @@ void Error_Handler(void);
 #define LCD_DC_GPIO_Port GPIOG
 #define DRV_X_DIR_Pin GPIO_PIN_9
 #define DRV_X_DIR_GPIO_Port GPIOE
+#define FAN_EXTR0_Pin GPIO_PIN_10
+#define FAN_EXTR0_GPIO_Port GPIOE
+#define HEAT0_Pin GPIO_PIN_12
+#define HEAT0_GPIO_Port GPIOE
 #define DRV_Z1_DIR_Pin GPIO_PIN_13
 #define DRV_Z1_DIR_GPIO_Port GPIOE
 #define E0_CS_Pin GPIO_PIN_14
