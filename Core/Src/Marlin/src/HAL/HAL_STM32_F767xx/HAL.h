@@ -39,7 +39,7 @@
 // ------------------------
 
 //Serial override
-extern HalSerialUSB usb_serial;
+//extern HalSerialUSB usb_serial;
 extern HalSerialUART uart_serial;
 extern UART_HandleTypeDef huart3;
 

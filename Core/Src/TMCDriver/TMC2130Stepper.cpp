@@ -1,6 +1,6 @@
 #include <TMCStepper.h>
 #include "TMC_MACROS.h"
-#include "HAL/HAL_IO.h"
+#include "HAL_IO.h"
 
 int8_t TMC2130Stepper::chain_length = 0;
 uint32_t TMC2130Stepper::spi_speed = 16000000/8;
@@ -44,15 +44,7 @@ TMC2130Stepper::TMC2130Stepper(uint16_t pinCS, float RS, uint16_t pinMOSI, uint1
   }
 */
 void TMC2130Stepper::defaults() {
-  //MSLUT0_register.sr = ???;
-  //MSLUT1_register.sr = ???;
-  //MSLUT2_register.sr = ???;
-  //MSLUT3_register.sr = ???;
-  //MSLUT4_register.sr = ???;
-  //MSLUT5_register.sr = ???;
-  //MSLUT6_register.sr = ???;
-  //MSLUT7_register.sr = ???;
-  //MSLUTSTART_register.start_sin90 = 247;
+
   PWMCONF_register.sr = 0x00050480;
 }
 

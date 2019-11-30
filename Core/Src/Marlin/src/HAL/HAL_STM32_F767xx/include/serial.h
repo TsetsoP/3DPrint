@@ -14,6 +14,7 @@
 #define OCT 8
 #define BIN 2
 
+#if HAS_USB_SERIAL
 class HalSerialUSB
 {
 
@@ -75,6 +76,8 @@ public:
 	volatile bool host_connected;
 
 };
+#endif //HAS_USB_SERIAL
+
 class HalSerialUART
 {
 #define UART_BUFFER_SIZE 16

@@ -22,7 +22,7 @@
  */
 #pragma once
 
-#include "HAL/HAL_IO.h"
+#include "HAL_IO.h"
 
 #ifndef PWM
   #define PWM OUTPUT

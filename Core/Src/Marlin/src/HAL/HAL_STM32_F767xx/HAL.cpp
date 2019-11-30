@@ -4,7 +4,10 @@
 #include "../shared/Delay.h"
 #include "HAL.h"
 
+#if HAS_USB_SERIAL
 HalSerialUSB usb_serial;
+#endif //HAS_USB_SERIAL
+
 HalSerialUART uart_serial;
 
 SpiStm32F7xx SPI(SPI1);

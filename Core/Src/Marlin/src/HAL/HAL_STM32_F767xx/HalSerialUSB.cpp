@@ -1,4 +1,5 @@
-#if defined(STM32GENERIC) && defined(STM32F767xx)
+#include "HAL.h"
+#if defined(STM32GENERIC) && defined(STM32F767xx) && HAS_USB_SERIAL
 #include "serial.h"
 #include "usbd_cdc_if.h"
 

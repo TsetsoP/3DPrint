@@ -1,12 +1,9 @@
-#if defined(STM32GENERIC) && defined(STM32F767xx)
 #include "HAL.h"
+#if defined(STM32GENERIC) && defined(STM32F767xx)
 #include "serial.h"
-#include "usbd_cdc_if.h"
 #define TIME_OUT  1000
 
-
 static bool hasRxData = false;
-
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
