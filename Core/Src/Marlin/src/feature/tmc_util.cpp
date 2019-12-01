@@ -377,7 +377,7 @@
       #if AXIS_IS_TMC(Z)
         if (monitor_tmc_driver(stepperZ, need_update_error_counters, need_debug_reporting)) {
           #if AXIS_IS_TMC(Z2)
-            step_current_down(stepperZ2)
+            step_current_down(stepperZ2);
           #endif
           #if AXIS_IS_TMC(Z3)
             step_current_down(stepperZ3)
@@ -387,7 +387,7 @@
       #if AXIS_IS_TMC(Z2)
         if (monitor_tmc_driver(stepperZ2, need_update_error_counters, need_debug_reporting)) {
           #if AXIS_IS_TMC(Z)
-            step_current_down(stepperZ)
+            step_current_down(stepperZ);
           #endif
           #if AXIS_IS_TMC(Z3)
             step_current_down(stepperZ3)

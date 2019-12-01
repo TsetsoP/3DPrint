@@ -27,7 +27,7 @@
   #error "The-Borg supports up to 3 hotends / E-steppers."
 #endif
 
-#define BOARD_INFO_NAME      "The-Borge"
+#define BOARD_INFO_NAME      "NUCLEO_3D"
 #define DEFAULT_MACHINE_NAME BOARD_INFO_NAME
 
 #define E2END 0xFFF   // EEPROM end address
@@ -82,13 +82,13 @@
   #define Z_CS_PIN         PD10
 #endif
 
-/*#define Z2_STEP_PIN        PC13
-#define Z2_DIR_PIN         PC14
-#define Z2_ENABLE_PIN      PC15
-#ifndef Z_CS_PIN
-  #define Z_CS_PIN         PD5
+#define Z2_STEP_PIN        PD11
+#define Z2_DIR_PIN         PE7
+#define Z2_ENABLE_PIN      PD15
+#ifndef Z2_CS_PIN
+  #define Z2_CS_PIN         PD12
 #endif
-*/
+
 #define E0_STEP_PIN        PF3
 #define E0_DIR_PIN         PF15
 #define E0_ENABLE_PIN      PE15
@@ -133,7 +133,7 @@
 // Temperature Sensors
 //
 
-#define TEMP_0_PIN         PA2   // Analog Input
+#define TEMP_0_PIN         PA4   // Analog Input
 //#define TEMP_1_PIN         PC2   // Analog Input
 //#define TEMP_2_PIN         PC1   // Analog Input
 //#define TEMP_3_PIN         PC0   // Analog Input

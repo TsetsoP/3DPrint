@@ -497,11 +497,12 @@ static void MX_GPIO_Init(void)
                           |TOUCH_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, DRV_X_DIR_Pin|FAN_EXTR0_Pin|HEAT0_Pin|DRV_Z1_DIR_Pin 
-                          |E0_CS_Pin|E0_EN_Pin|DRV_Y_DIR_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, DRV_Z2_DIR_Pin|DRV_X_DIR_Pin|FAN_EXTR0_Pin|HEAT0_Pin 
+                          |DRV_Z1_DIR_Pin|E0_CS_Pin|E0_EN_Pin|DRV_Y_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, DRV_Z1_CS_Pin|DRV_X_CS_Pin|LCD_CS_Pin|LCD_RESET_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, DRV_Z1_CS_Pin|DRV_Z2_STEP_Pin|DRV_Z2_CS_Pin|DRV_Z2_EN_Pin 
+                          |DRV_X_CS_Pin|LCD_CS_Pin|LCD_RESET_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_RESET);
@@ -530,8 +531,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DRV_X_DIR_Pin DRV_Z1_DIR_Pin E0_EN_Pin DRV_Y_DIR_Pin */
-  GPIO_InitStruct.Pin = DRV_X_DIR_Pin|DRV_Z1_DIR_Pin|E0_EN_Pin|DRV_Y_DIR_Pin;
+  /*Configure GPIO pins : DRV_Z2_DIR_Pin DRV_X_DIR_Pin DRV_Z1_DIR_Pin E0_CS_Pin 
+                           E0_EN_Pin DRV_Y_DIR_Pin */
+  GPIO_InitStruct.Pin = DRV_Z2_DIR_Pin|DRV_X_DIR_Pin|DRV_Z1_DIR_Pin|E0_CS_Pin 
+                          |E0_EN_Pin|DRV_Y_DIR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -544,27 +547,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : E0_CS_Pin */
-  GPIO_InitStruct.Pin = E0_CS_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(E0_CS_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : DRV_Z1_CS_Pin DRV_X_CS_Pin LCD_CS_Pin LCD_RESET_Pin */
-  GPIO_InitStruct.Pin = DRV_Z1_CS_Pin|DRV_X_CS_Pin|LCD_CS_Pin|LCD_RESET_Pin;
+  /*Configure GPIO pins : DRV_Z1_CS_Pin DRV_Z2_STEP_Pin DRV_Z2_CS_Pin DRV_Z2_EN_Pin 
+                           DRV_X_CS_Pin LCD_CS_Pin LCD_RESET_Pin */
+  GPIO_InitStruct.Pin = DRV_Z1_CS_Pin|DRV_Z2_STEP_Pin|DRV_Z2_CS_Pin|DRV_Z2_EN_Pin 
+                          |DRV_X_CS_Pin|LCD_CS_Pin|LCD_RESET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PA10 PA11 PA12 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TOUCH_IRQ_Pin */
   GPIO_InitStruct.Pin = TOUCH_IRQ_Pin;
@@ -582,35 +572,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(htim);
-
-  if (htim->Instance == TIM2)
-  {
-
-	//uint16_t val = driver.sg_result();
-	//char buffer[16];
-	//sprintf(buffer, "%d", val);
-	//setXposText(buffer);
-	//setLoadBar(val);
-	//GUITDRV_ADS7846_Exec();
-	//OS_TimeMS++;
-	  //uint16_t load = driver.sg_result();
-
-  }
-  else if(htim->Instance == TIM3)
-  {
-	  HAL_GPIO_TogglePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin);
-	  HAL_GPIO_TogglePin(DRV_X_STEP_GPIO_Port, DRV_X_STEP_Pin);
-  }
-}
-
-void btnClick(void)
-{
-
-}
 
 /* USER CODE END 4 */
 

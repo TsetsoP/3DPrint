@@ -72,6 +72,8 @@ void Error_Handler(void);
 #define E0_DIR_GPIO_Port GPIOF
 #define LCD_DC_Pin GPIO_PIN_0
 #define LCD_DC_GPIO_Port GPIOG
+#define DRV_Z2_DIR_Pin GPIO_PIN_7
+#define DRV_Z2_DIR_GPIO_Port GPIOE
 #define DRV_X_DIR_Pin GPIO_PIN_9
 #define DRV_X_DIR_GPIO_Port GPIOE
 #define FAN_EXTR0_Pin GPIO_PIN_10
@@ -86,6 +88,12 @@ void Error_Handler(void);
 #define E0_EN_GPIO_Port GPIOE
 #define DRV_Z1_CS_Pin GPIO_PIN_10
 #define DRV_Z1_CS_GPIO_Port GPIOD
+#define DRV_Z2_STEP_Pin GPIO_PIN_11
+#define DRV_Z2_STEP_GPIO_Port GPIOD
+#define DRV_Z2_CS_Pin GPIO_PIN_12
+#define DRV_Z2_CS_GPIO_Port GPIOD
+#define DRV_Z2_EN_Pin GPIO_PIN_13
+#define DRV_Z2_EN_GPIO_Port GPIOD
 #define DRV_X_CS_Pin GPIO_PIN_14
 #define DRV_X_CS_GPIO_Port GPIOD
 #define DRV_Z1_EN_Pin GPIO_PIN_4
