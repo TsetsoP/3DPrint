@@ -101,10 +101,10 @@ template<class TMC, char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
 class TMCMarlin : public TMC, public TMCStorage<AXIS_LETTER, DRIVER_ID> {
   public:
     TMCMarlin(const uint16_t cs_pin, const float RS) :
-      TMC(cs_pin, &SPI, RS)
+      TMC(cs_pin, &SPI, RS)      //My edit!
       {}
     TMCMarlin(const uint16_t cs_pin, const float RS, const uint8_t axis_chain_index) :
-      TMC(cs_pin, &SPI, RS, axis_chain_index)
+      TMC(cs_pin, &SPI, RS, axis_chain_index)      //My edit!
       {}
     TMCMarlin(const uint16_t CS, const float RS, const uint16_t pinMOSI, const uint16_t pinMISO, const uint16_t pinSCK) :
       TMC(CS, RS, pinMOSI, pinMISO, pinSCK)
