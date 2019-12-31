@@ -8,8 +8,6 @@
 HalSerialUSB usb_serial;
 #endif //HAS_USB_SERIAL
 
-HalSerialUART uart_serial;
-
 SpiStm32F7xx SPI(SPI1);
 
 #if ENABLED(TOUCH_BUTTONS)
@@ -34,6 +32,7 @@ SpiStm32F7xx SPI(SPI1);
 void HAL_init(void)
 {
 	HAL_IOinit();
+	HAL_init_serial();
 }
 
 

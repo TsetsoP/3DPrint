@@ -57,7 +57,7 @@ uint8_t _getc();
 #include "fastio.h"
 #include "watchdog.h"
 #include "timers.h"
-#include "serial.h"
+#include <HalSerial.h>
 
 #define SHARED_SERVOS HAS_SERVOS
 

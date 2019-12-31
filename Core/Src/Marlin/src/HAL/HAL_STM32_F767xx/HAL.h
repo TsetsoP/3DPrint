@@ -1,4 +1,3 @@
-
 #pragma once
 
 #define CPU_32_BIT
@@ -23,6 +22,7 @@
 #include "fastio.h"
 #include "watchdog.h"
 #include "timers.h"
+#include "HalSerial.h"
 #include "serial.h"
 #include "adc.h"
 
@@ -40,16 +40,13 @@
 
 //Serial override
 //extern HalSerialUSB usb_serial;
-extern HalSerialUART uart_serial;
-extern UART_HandleTypeDef huart3;
-
 extern SpiStm32F7xx SPI;
 
 #if !WITHIN(SERIAL_PORT, -1, 6)
   #error "SERIAL_PORT must be from -1 to 6"
 #endif
 #if SERIAL_PORT == -1
-  #define MYSERIAL0 uart_serial
+  #define MYSERIAL0 uart_serial0
 #elif SERIAL_PORT == 1
   #define MYSERIAL0 SerialUART1
 #elif SERIAL_PORT == 2
@@ -89,8 +86,6 @@ extern SpiStm32F7xx SPI;
 #else
   #define NUM_SERIAL 1
 #endif
-
-
 
 #define CRITICAL_SECTION_START  uint32_t primask = __get_PRIMASK(); __disable_irq()
 #define CRITICAL_SECTION_END    if (!primask) __enable_irq()

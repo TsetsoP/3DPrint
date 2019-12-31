@@ -80,14 +80,14 @@ public:
 
 class HalSerialUART
 {
-#define UART_BUFFER_SIZE 16
+#define UART_BUFFER_SIZE 64
 public:
 
   #if ENABLED(EMERGENCY_PARSER)
     EmergencyParser::State emergency_state;
   #endif
 
-    HalSerialUART();
+    HalSerialUART(USART_TypeDef *USART);
 	virtual ~HalSerialUART();
 	void begin(int32_t baud);
 	void end();
@@ -131,12 +131,22 @@ public:
 	void println(double value, int round = 6);
 	void println(void);
 
+	void UART_RxCpltCallback();
+	void errroHandler();
+	UART_HandleTypeDef *getUART_Handle();
 	//volatile RingBuffer<uint8_t, 128> receive_buffer;
 	//volatile RingBuffer<uint8_t, 128> transmit_buffer;
 	//volatile bool host_connected;
 private:
+	void restartRxTransffer();
+	void finishRxTransffer();
+	USART_TypeDef *USART;
+	UART_HandleTypeDef huart;
 	uint8_t buffer[UART_BUFFER_SIZE];
-	uint8_t bufferpos;
+	uint8_t bufferPos;
+	uint16_t rxDataSize;
+	bool hasRxData;
+
 
 };
 
