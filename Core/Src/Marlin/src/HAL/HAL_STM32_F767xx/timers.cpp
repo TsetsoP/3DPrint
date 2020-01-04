@@ -65,13 +65,13 @@ void HAL_timer_start(const uint8_t timer_num, const uint32_t frequency) {
       break;
     case TEMP_TIMER_NUM:
       //TEMP TIMER TIM7 // any available 16bit Timer (1 already used for PWM)
-      __HAL_RCC_TIM7_CLK_ENABLE();
-      timerConfig[1].timerdef.Instance               = TIM7;
+      __HAL_RCC_TIM4_CLK_ENABLE();
+      timerConfig[1].timerdef.Instance               = TIM4;
       timerConfig[1].timerdef.Init.Prescaler         = (TEMP_TIMER_PRESCALE);
       timerConfig[1].timerdef.Init.CounterMode       = TIM_COUNTERMODE_UP;
       timerConfig[1].timerdef.Init.ClockDivision     = TIM_CLOCKDIVISION_DIV1;
-      timerConfig[1].IRQ_Id = TIM7_IRQn;
-      timerConfig[1].callback = (uint32_t)TC7_Handler;
+      timerConfig[1].IRQ_Id = TIM4_IRQn;
+      timerConfig[1].callback = (uint32_t)TC4_Handler;
       HAL_NVIC_SetPriority(timerConfig[1].IRQ_Id, 2, 0);
       break;
     }
@@ -88,7 +88,7 @@ void HAL_timer_start(const uint8_t timer_num, const uint32_t frequency) {
 extern "C" void TIM5_IRQHandler() {
   ((void(*)(void))timerConfig[0].callback)();
 }
-extern "C" void TIM7_IRQHandler() {
+extern "C" void TIM4_IRQHandler() {
   ((void(*)(void))timerConfig[1].callback)();
 }
 

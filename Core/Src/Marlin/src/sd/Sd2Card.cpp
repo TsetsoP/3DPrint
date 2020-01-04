@@ -30,7 +30,7 @@
 
 #include "../inc/MarlinConfig.h"
 
-#if ENABLED(SDSUPPORT) && NONE(USB_FLASH_DRIVE_SUPPORT, SDIO_SUPPORT)
+#if ENABLED(SDSUPPORT) && NONE(USB_FLASH_DRIVE_SUPPORT, USB_MASS_STORAGE_SUPPORT, SDIO_SUPPORT) //My edit!
 
 /* Enable FAST CRC computations - You can trade speed for FLASH space if
  * needed by disabling the following define */

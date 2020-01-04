@@ -100,6 +100,8 @@ void Error_Handler(void);
 #define DRV_Z1_EN_GPIO_Port GPIOG
 #define DRV_Y_EN_Pin GPIO_PIN_5
 #define DRV_Y_EN_GPIO_Port GPIOG
+#define USB_VBUS_Pin GPIO_PIN_6
+#define USB_VBUS_GPIO_Port GPIOG
 #define DRV_Y_STEP_Pin GPIO_PIN_8
 #define DRV_Y_STEP_GPIO_Port GPIOG
 #define LCD_CS_Pin GPIO_PIN_0

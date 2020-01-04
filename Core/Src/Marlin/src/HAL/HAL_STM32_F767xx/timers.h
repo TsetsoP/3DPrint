@@ -32,7 +32,7 @@
 #define hal_timer_t uint32_t  // TODO: One is 16-bit, one 32-bit - does this need to be checked?
 #define HAL_TIMER_TYPE_MAX 0xFFFF
 
-#define HAL_TIMER_RATE         (HAL_RCC_GetSysClockFreq() / 2)  // frequency of timer peripherals
+#define HAL_TIMER_RATE         (F_CPU / 2)  // frequency of timer peripherals
 
 #define STEP_TIMER_NUM 0  // index of timer to use for stepper
 #define TEMP_TIMER_NUM 1  // index of timer to use for temperature
@@ -61,9 +61,9 @@
 // TODO change this
 
 extern void TC5_Handler();
-extern void TC7_Handler();
+extern void TC4_Handler();
 #define HAL_STEP_TIMER_ISR()  void TC5_Handler()
-#define HAL_TEMP_TIMER_ISR()  void TC7_Handler()
+#define HAL_TEMP_TIMER_ISR()  void TC4_Handler()
 
 // ------------------------
 // Types

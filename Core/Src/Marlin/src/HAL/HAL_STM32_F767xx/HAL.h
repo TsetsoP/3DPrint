@@ -19,6 +19,8 @@
 #include "../shared/HAL_SPI.h"
 
 #include "../../inc/MarlinConfigPre.h"
+#include "usb_host.h"
+
 #include "fastio.h"
 #include "watchdog.h"
 #include "timers.h"

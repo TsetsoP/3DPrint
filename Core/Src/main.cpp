@@ -132,52 +132,10 @@ int main(void)
   MX_CRC_Init();
   MX_DMA2D_Init();
   MX_SPI6_Init();
-  /* USER CODE BEGIN 2 */
- /* GUI_Init();
-  GUI_Clear();
-  GUI_SetColor(GUI_WHITE);
-  GUI_SetFont(&GUI_Font32_1);
 
-  CreateWindow();
-
-  driver.begin();
-  driver.toff(4);
-  driver.blank_time(24);
-  driver.rms_current(900); // mA
-  driver.microsteps(32);
-  driver.TCOOLTHRS(0xFFFFF); // 20bit max
-  driver.THIGH(0);
-  driver.semin(5);
-  driver.semax(2);
-  driver.sedn(0b01);
-  driver.sgt(STALL_VALUE);
-  driver.sfilt(true);
-  driver.en_pwm_mode(true);
-  driver.pwm_freq(0);
-  //driver.pwm_ampl(240);
-  //driver.pwm_grad(2);
-  driver.intpol(true);
-  driver.commitRegistryChages();
-
-  HAL_GPIO_WritePin(DRV_X_EN_GPIO_Port, DRV_X_EN_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(DRV_X_DIR_GPIO_Port, DRV_X_DIR_Pin, GPIO_PIN_RESET);
-  HAL_TIM_Base_Start_IT(&htim3);
-  HAL_TIM_Base_Start_IT(&htim2);
-*/
   setup();
-  /* USER CODE END 2 */
+  loop();
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-	  loop();
-	  //GUI_Delay(100);
-  }
-  /* USER CODE END 3 */
 }
 
 /**
@@ -231,7 +189,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART1|RCC_PERIPHCLK_USART3
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_UART5
                               |RCC_PERIPHCLK_CLK48;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 96;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 2;
@@ -239,8 +197,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PLLSAI.PLLSAIP = RCC_PLLSAIP_DIV4;
   PeriphClkInitStruct.PLLSAIDivQ = 1;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
-  PeriphClkInitStruct.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
   PeriphClkInitStruct.Usart3ClockSelection = RCC_USART3CLKSOURCE_PCLK1;
+  PeriphClkInitStruct.Uart5ClockSelection = RCC_UART5CLKSOURCE_PCLK1;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CLK48SOURCE_PLLSAIP;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
@@ -462,8 +420,8 @@ static void MX_GPIO_Init(void)
                           |DRV_X_EN_Pin|E0_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, LCD_DC_Pin|DRV_Z1_EN_Pin|DRV_Y_EN_Pin|DRV_Y_STEP_Pin 
-                          |TOUCH_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, LCD_DC_Pin|DRV_Z1_EN_Pin|DRV_Y_EN_Pin|USB_VBUS_Pin 
+                          |DRV_Y_STEP_Pin|TOUCH_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, DRV_Z2_DIR_Pin|DRV_X_DIR_Pin|FAN_EXTR0_Pin|HEAT0_Pin 
@@ -524,6 +482,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : USB_VBUS_Pin */
+  GPIO_InitStruct.Pin = USB_VBUS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(USB_VBUS_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TOUCH_IRQ_Pin */
   GPIO_InitStruct.Pin = TOUCH_IRQ_Pin;

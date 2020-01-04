@@ -20,3 +20,5 @@
  *
  */
 #pragma once
+
+#define USB_MASS_STORAGE_SUPPORT
