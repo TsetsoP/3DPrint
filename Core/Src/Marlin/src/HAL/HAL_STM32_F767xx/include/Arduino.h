@@ -50,6 +50,9 @@ uint16_t analogRead(pin_t);
 #define pgm_read_word(addr)       pgm_read_word_near(addr)
 #define pgm_read_dword(addr)      pgm_read_dword_near(addr)
 
+int32_t random(int32_t);
+int32_t random(int32_t, int32_t);
+
 using std::memcpy;
 #define memcpy_P memcpy
 #define sprintf_P sprintf

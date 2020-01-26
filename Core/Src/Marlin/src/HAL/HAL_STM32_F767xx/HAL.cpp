@@ -8,7 +8,7 @@
 HalSerialUSB usb_serial;
 #endif //HAS_USB_SERIAL
 
-SpiStm32F7xx SPI(SPI1);
+SpiStm32F7xx SPI(SPI4);
 
 #if ENABLED(TOUCH_BUTTONS)
 
@@ -34,6 +34,7 @@ void HAL_init(void)
 	HAL_IOinit();
 	HAL_init_serial();
 	MX_USB_HOST_Init();
+	HAL_timer_start(FAN_TIMER_NUM, 1000);
 }
 
 

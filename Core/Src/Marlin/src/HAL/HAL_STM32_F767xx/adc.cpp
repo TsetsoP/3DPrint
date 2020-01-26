@@ -28,10 +28,9 @@ void HAL_adc_init(void)
 	}
 	/** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
 	 */
-	sConfig.Channel = ADC_CHANNEL_4;
+	sConfig.Channel = ADC_CHANNEL_6;
 	sConfig.Rank = ADC_REGULAR_RANK_1;
 	sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
-
 	status = HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 	if (status != HAL_OK)
 	{

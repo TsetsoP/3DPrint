@@ -50,6 +50,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -58,70 +60,70 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define E0_STEP_Pin GPIO_PIN_3
-#define E0_STEP_GPIO_Port GPIOF
-#define DRV_Y_CS_Pin GPIO_PIN_11
-#define DRV_Y_CS_GPIO_Port GPIOF
-#define DRV_Z1_STEP_Pin GPIO_PIN_12
-#define DRV_Z1_STEP_GPIO_Port GPIOF
-#define DRV_X_STEP_Pin GPIO_PIN_13
-#define DRV_X_STEP_GPIO_Port GPIOF
-#define DRV_X_EN_Pin GPIO_PIN_14
-#define DRV_X_EN_GPIO_Port GPIOF
-#define E0_DIR_Pin GPIO_PIN_15
-#define E0_DIR_GPIO_Port GPIOF
+#define DRV_Z1_CS_Pin GPIO_PIN_3
+#define DRV_Z1_CS_GPIO_Port GPIOF
+#define BED_PROBE_Pin GPIO_PIN_10
+#define BED_PROBE_GPIO_Port GPIOF
+#define DRV_Y_DIR_Pin GPIO_PIN_11
+#define DRV_Y_DIR_GPIO_Port GPIOF
+#define DRV_X_DIR_Pin GPIO_PIN_12
+#define DRV_X_DIR_GPIO_Port GPIOF
+#define DRV_Z2_EN_Pin GPIO_PIN_13
+#define DRV_Z2_EN_GPIO_Port GPIOF
+#define DRV_E0_EN_Pin GPIO_PIN_14
+#define DRV_E0_EN_GPIO_Port GPIOF
+#define DRV_Z1_EN_Pin GPIO_PIN_15
+#define DRV_Z1_EN_GPIO_Port GPIOF
 #define LCD_DC_Pin GPIO_PIN_0
 #define LCD_DC_GPIO_Port GPIOG
-#define DRV_Z2_DIR_Pin GPIO_PIN_7
-#define DRV_Z2_DIR_GPIO_Port GPIOE
-#define DRV_X_DIR_Pin GPIO_PIN_9
-#define DRV_X_DIR_GPIO_Port GPIOE
-#define FAN_EXTR0_Pin GPIO_PIN_10
-#define FAN_EXTR0_GPIO_Port GPIOE
+#define DRV_E0_DIR_Pin GPIO_PIN_7
+#define DRV_E0_DIR_GPIO_Port GPIOE
+#define DRV_Z1_DIR_Pin GPIO_PIN_9
+#define DRV_Z1_DIR_GPIO_Port GPIOE
+#define DRV_Z1_STEP_Pin GPIO_PIN_11
+#define DRV_Z1_STEP_GPIO_Port GPIOE
 #define HEAT0_Pin GPIO_PIN_12
 #define HEAT0_GPIO_Port GPIOE
-#define DRV_Z1_DIR_Pin GPIO_PIN_13
-#define DRV_Z1_DIR_GPIO_Port GPIOE
-#define E0_CS_Pin GPIO_PIN_14
-#define E0_CS_GPIO_Port GPIOE
-#define E0_EN_Pin GPIO_PIN_15
-#define E0_EN_GPIO_Port GPIOE
-#define DRV_Z1_CS_Pin GPIO_PIN_10
-#define DRV_Z1_CS_GPIO_Port GPIOD
-#define DRV_Z2_STEP_Pin GPIO_PIN_11
-#define DRV_Z2_STEP_GPIO_Port GPIOD
-#define DRV_Z2_CS_Pin GPIO_PIN_12
-#define DRV_Z2_CS_GPIO_Port GPIOD
-#define DRV_Z2_EN_Pin GPIO_PIN_13
-#define DRV_Z2_EN_GPIO_Port GPIOD
-#define DRV_X_CS_Pin GPIO_PIN_14
+#define DRV_Z2_CS_Pin GPIO_PIN_13
+#define DRV_Z2_CS_GPIO_Port GPIOE
+#define DRV_Z2_DIR_Pin GPIO_PIN_14
+#define DRV_Z2_DIR_GPIO_Port GPIOE
+#define DRV_Z2_STEP_Pin GPIO_PIN_15
+#define DRV_Z2_STEP_GPIO_Port GPIOE
+#define DRV_X_CS_Pin GPIO_PIN_10
 #define DRV_X_CS_GPIO_Port GPIOD
-#define DRV_Z1_EN_Pin GPIO_PIN_4
-#define DRV_Z1_EN_GPIO_Port GPIOG
+#define DRV_E0_STEP_Pin GPIO_PIN_14
+#define DRV_E0_STEP_GPIO_Port GPIOD
+#define DRV_E0_CS_Pin GPIO_PIN_15
+#define DRV_E0_CS_GPIO_Port GPIOD
+#define DRV_X_EN_Pin GPIO_PIN_4
+#define DRV_X_EN_GPIO_Port GPIOG
 #define DRV_Y_EN_Pin GPIO_PIN_5
 #define DRV_Y_EN_GPIO_Port GPIOG
 #define USB_VBUS_Pin GPIO_PIN_6
 #define USB_VBUS_GPIO_Port GPIOG
-#define DRV_Y_STEP_Pin GPIO_PIN_8
-#define DRV_Y_STEP_GPIO_Port GPIOG
+#define DRV_Y_CS_Pin GPIO_PIN_8
+#define DRV_Y_CS_GPIO_Port GPIOG
 #define LCD_CS_Pin GPIO_PIN_0
 #define LCD_CS_GPIO_Port GPIOD
 #define LCD_RESET_Pin GPIO_PIN_1
 #define LCD_RESET_GPIO_Port GPIOD
-#define TOUCH_IRQ_Pin GPIO_PIN_11
-#define TOUCH_IRQ_GPIO_Port GPIOG
+#define TOUCH_CS_Pin GPIO_PIN_10
+#define TOUCH_CS_GPIO_Port GPIOG
 #define TOUCH_MISO_Pin GPIO_PIN_12
 #define TOUCH_MISO_GPIO_Port GPIOG
 #define TOUCH_CLK_Pin GPIO_PIN_13
 #define TOUCH_CLK_GPIO_Port GPIOG
-#define TOUCH_MOSI_Pin GPIO_PIN_14
-#define TOUCH_MOSI_GPIO_Port GPIOG
-#define TOUCH_CS_Pin GPIO_PIN_15
-#define TOUCH_CS_GPIO_Port GPIOG
+#define DRV_X_STEP_Pin GPIO_PIN_14
+#define DRV_X_STEP_GPIO_Port GPIOG
+#define TOUCH_MOSI_Pin GPIO_PIN_5
+#define TOUCH_MOSI_GPIO_Port GPIOB
 #define LED_BLUE_Pin GPIO_PIN_7
 #define LED_BLUE_GPIO_Port GPIOB
-#define DRV_Y_DIR_Pin GPIO_PIN_0
-#define DRV_Y_DIR_GPIO_Port GPIOE
+#define DRV_Y_STEP_Pin GPIO_PIN_0
+#define DRV_Y_STEP_GPIO_Port GPIOE
+#define TOUCH_IRQ_Pin GPIO_PIN_1
+#define TOUCH_IRQ_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

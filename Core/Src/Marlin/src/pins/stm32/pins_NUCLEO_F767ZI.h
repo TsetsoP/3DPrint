@@ -51,7 +51,7 @@
 // Z Probe (when not Z_MIN_PIN)
 //
 #ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN  PA4
+  #define Z_MIN_PROBE_PIN  F10
 #endif
 
 //
@@ -59,41 +59,39 @@
 //
 #define STEPPER_ENABLE_PIN PE1
 
-#define X_STEP_PIN         PF13
-#define X_DIR_PIN          PE9
-#define X_ENABLE_PIN       PF14
+#define X_STEP_PIN         PG14
+#define X_DIR_PIN          PF12
+#define X_ENABLE_PIN       PG4
 #ifndef X_CS_PIN
-  #define X_CS_PIN          PD14
+  #define X_CS_PIN          PD10
 #endif
 
-
-
-#define Y_STEP_PIN         PG8
-#define Y_DIR_PIN          PE0
+#define Y_STEP_PIN         PE0
+#define Y_DIR_PIN          PF11
 #define Y_ENABLE_PIN       PG5
 #ifndef Y_CS_PIN
-  #define Y_CS_PIN         PF11
+  #define Y_CS_PIN         PG8
 #endif
 
-#define Z_STEP_PIN         PF12
-#define Z_DIR_PIN          PE13
-#define Z_ENABLE_PIN       PG4
+#define Z_STEP_PIN         PE11
+#define Z_DIR_PIN          PE9
+#define Z_ENABLE_PIN       PF15
 #ifndef Z_CS_PIN
-  #define Z_CS_PIN         PD10
+  #define Z_CS_PIN         PF3
 #endif
 
-#define Z2_STEP_PIN        PD11
-#define Z2_DIR_PIN         PE7
-#define Z2_ENABLE_PIN      PD15
+#define Z2_STEP_PIN        PE15
+#define Z2_DIR_PIN         PE14
+#define Z2_ENABLE_PIN      PF13
 #ifndef Z2_CS_PIN
-  #define Z2_CS_PIN         PD12
+  #define Z2_CS_PIN        PE13
 #endif
 
-#define E0_STEP_PIN        PF3
-#define E0_DIR_PIN         PF15
-#define E0_ENABLE_PIN      PE15
+#define E0_STEP_PIN        PD14
+#define E0_DIR_PIN         PE7
+#define E0_ENABLE_PIN      PF14
 #ifndef E0_CS_PIN
-  #define E0_CS_PIN         PE14
+  #define E0_CS_PIN        PD15
 #endif
 
 #if ENABLED(TOUCH_BUTTONS)
@@ -152,14 +150,14 @@
 #define HEATER_BED_PIN     PF6
 
 #define FAN_INVERTING      true
-#define FAN_SOFT_PWM
+//#define FAN_SOFT_PWM
 #ifndef FAN_PIN
-  #define FAN_PIN          PE10
+  #define FAN_PIN          PB10
 #endif
-//#define FAN1_PIN           PA0
-//#define FAN2_PIN           PA1
+//#define FAN1_PIN           PB10
+#define CONTROLLER_FAN_PIN PA3
 
-//#define ORIG_E0_AUTO_FAN_PIN  PA1   // Use this by NOT overriding E0_AUTO_FAN_PIN
+#define ORIG_E0_AUTO_FAN_PIN  PA0   // Use this by NOT overriding E0_AUTO_FAN_PIN
 
 //
 // Misc. Functions
@@ -173,8 +171,8 @@
 // Průša i3 MK2 Multi Material Multiplexer Support
 //
 
-#define E_MUX0_PIN         PG3
-#define E_MUX1_PIN         PG4
+//#define E_MUX0_PIN         PG3
+//#define E_MUX1_PIN         PG4
 
 //
 // Servos
@@ -189,7 +187,7 @@
 //#define LED_PIN            PA2   // Alive
 #define PS_ON_PIN          PA3
 #define KILL_PIN           -1 //PD5   // EXP2-10
-#define PWR_LOSS           PG5   // Power loss / nAC_FAULT
+//#define PWR_LOSS           PG5   // Power loss / nAC_FAULT
 
 //
 // MAX7219_DEBUG

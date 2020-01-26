@@ -713,7 +713,10 @@ void idle(
     joystick.inject_jog_moves();
   #endif
 
-    MX_USB_HOST_Process();
+  #if  ENABLED(USB_MASS_STORAGE_SUPPORT)
+    USB_HOST_PROCESS
+  #endif
+
 }
 
 /**

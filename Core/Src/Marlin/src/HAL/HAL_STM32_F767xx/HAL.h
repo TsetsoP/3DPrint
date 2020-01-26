@@ -89,6 +89,10 @@ extern SpiStm32F7xx SPI;
   #define NUM_SERIAL 1
 #endif
 
+#if  ENABLED(USB_MASS_STORAGE_SUPPORT)
+	#define USB_HOST_PROCESS MX_USB_HOST_Process();
+#endif
+
 #define CRITICAL_SECTION_START  uint32_t primask = __get_PRIMASK(); __disable_irq()
 #define CRITICAL_SECTION_END    if (!primask) __enable_irq()
 #define ISRS_ENABLED() (!__get_PRIMASK())
@@ -188,4 +192,3 @@ void eeprom_update_block (const void *__src, void *__dst, size_t __n);
 #define PARSED_PIN_INDEX(code, dval) parser.intval(code, dval)
 
 void Error_Handler(const char *module, HAL_StatusTypeDef *hal_error);
-

@@ -154,8 +154,8 @@ uint8_t u8g_com_stm32duino_fsmc_fn(u8g_t *u8g, uint8_t msg, uint8_t arg_val, voi
 
 void LCD_IO_Init(uint8_t cs, uint8_t rs) {
 	SPIx_Init();
-	   LCD_CS_HIGH();
-	   LCD_RESET_HIGH();
+    LCD_CS_HIGH();
+	LCD_RESET_HIGH();
 	//ili9341_Init();
 
 }
