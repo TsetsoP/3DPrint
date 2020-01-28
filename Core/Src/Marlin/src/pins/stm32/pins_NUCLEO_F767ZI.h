@@ -38,6 +38,7 @@
 //
 // Limit Switches
 //
+/*
 #define X_MIN_PIN          PE9
 #define X_MAX_PIN          PE10
 #define Y_MIN_PIN          PE7
@@ -46,7 +47,7 @@
 #define Z_MAX_PIN          PG0
 #define E_MIN_PIN          PE2
 #define E_MAX_PIN          PE3
-
+*/
 //
 // Z Probe (when not Z_MIN_PIN)
 //
@@ -94,6 +95,16 @@
   #define E0_CS_PIN        PD15
 #endif
 
+// Direction buttons
+//#define BTN_EN1           PD13
+//#define BTN_EN2          PD12
+#define BTN_BACK          PD11
+#define BTN_ENC           PE10
+#define BTN_UP            PD12
+#define BTN_DWN           PD13
+//#define BTN_LFT          PD11
+//#define BTN_RT           PE10
+
 #if ENABLED(TOUCH_BUTTONS)
   #define TOUCH_CS_PIN     PG15   // SPI6_NSS
   #define TOUCH_SCK_PIN    PG13  // SPI6_SCK
@@ -102,43 +113,15 @@
   #define TOUCH_INT_PIN    PG11
 #endif
 
-/*
-#define E1_STEP_PIN        PC4
-#define E1_DIR_PIN         PC5
-#define E1_ENABLE_PIN      PB0
-
-#define E2_STEP_PIN        PC13
-#define E2_DIR_PIN         PC14
-#define E2_ENABLE_PIN      PC15
-*/
-
-/*
-
-#define SCK_PIN            PA5
-#define MISO_PIN           PA6
-#define MOSI_PIN           PA7
-
-#define SPI1_SCK_PIN       PA5
-#define SPI1_MISO_PIN      PA6
-#define SPI1_MOSI_PIN      PA7
-
-#define SPI6_SCK_PIN       PG13
-#define SPI6_MISO_PIN      PG12
-#define SPI6_MOSI_PIN      PG14
-*/
-
 //
 // Temperature Sensors
 //
-
 #define TEMP_0_PIN         PA4   // Analog Input
 //#define TEMP_1_PIN         PC2   // Analog Input
 //#define TEMP_2_PIN         PC1   // Analog Input
 //#define TEMP_3_PIN         PC0   // Analog Input
-
 #define TEMP_BED_PIN       PF10  // Analog Input
 
-//#define TEMP_5_PIN         PE12  // Analog Input, Probe temp
 
 //
 // Heaters / Fans
@@ -147,7 +130,7 @@
 #define HEATER_0_INVERTING true
 #define HEATER_0_PIN       PE12
 //#define HEATER_1_PIN       PD14
-#define HEATER_BED_PIN     PF6
+//#define HEATER_BED_PIN     PF6
 
 #define FAN_INVERTING      true
 //#define FAN_SOFT_PWM
@@ -156,8 +139,12 @@
 #endif
 //#define FAN1_PIN           PB10
 #define CONTROLLER_FAN_PIN PA3
-
 #define ORIG_E0_AUTO_FAN_PIN  PA0   // Use this by NOT overriding E0_AUTO_FAN_PIN
+
+#if HAS_CUTTER
+  #define SPINDLE_LASER_PWM_PIN     PC6
+  #define SPINDLE_LASER_ENA_PIN     PD5
+#endif
 
 //
 // Misc. Functions
@@ -192,9 +179,9 @@
 //
 // MAX7219_DEBUG
 //
-#define MAX7219_CLK_PIN    PG10  // EXP1-1
-#define MAX7219_DIN_PIN    PD7   // EXP1-3
-#define MAX7219_LOAD_PIN   PD1   // EXP1-5
+//#define MAX7219_CLK_PIN    PG10  // EXP1-1
+//#define MAX7219_DIN_PIN    PD7   // EXP1-3
+//#define MAX7219_LOAD_PIN   PD1   // EXP1-5
 
 //
 // LCD / Controller

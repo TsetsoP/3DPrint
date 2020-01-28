@@ -62,8 +62,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define DRV_Z1_CS_Pin GPIO_PIN_3
 #define DRV_Z1_CS_GPIO_Port GPIOF
-#define BED_PROBE_Pin GPIO_PIN_10
-#define BED_PROBE_GPIO_Port GPIOF
+#define LASER_EN_Pin GPIO_PIN_10
+#define LASER_EN_GPIO_Port GPIOF
 #define DRV_Y_DIR_Pin GPIO_PIN_11
 #define DRV_Y_DIR_GPIO_Port GPIOF
 #define DRV_X_DIR_Pin GPIO_PIN_12
@@ -80,6 +80,8 @@ void Error_Handler(void);
 #define DRV_E0_DIR_GPIO_Port GPIOE
 #define DRV_Z1_DIR_Pin GPIO_PIN_9
 #define DRV_Z1_DIR_GPIO_Port GPIOE
+#define BTN_RT_Pin GPIO_PIN_10
+#define BTN_RT_GPIO_Port GPIOE
 #define DRV_Z1_STEP_Pin GPIO_PIN_11
 #define DRV_Z1_STEP_GPIO_Port GPIOE
 #define HEAT0_Pin GPIO_PIN_12
@@ -92,6 +94,12 @@ void Error_Handler(void);
 #define DRV_Z2_STEP_GPIO_Port GPIOE
 #define DRV_X_CS_Pin GPIO_PIN_10
 #define DRV_X_CS_GPIO_Port GPIOD
+#define BTN_LEFT_Pin GPIO_PIN_11
+#define BTN_LEFT_GPIO_Port GPIOD
+#define BTN_DOWN_Pin GPIO_PIN_12
+#define BTN_DOWN_GPIO_Port GPIOD
+#define BTN_UP_Pin GPIO_PIN_13
+#define BTN_UP_GPIO_Port GPIOD
 #define DRV_E0_STEP_Pin GPIO_PIN_14
 #define DRV_E0_STEP_GPIO_Port GPIOD
 #define DRV_E0_CS_Pin GPIO_PIN_15
@@ -104,6 +112,8 @@ void Error_Handler(void);
 #define USB_VBUS_GPIO_Port GPIOG
 #define DRV_Y_CS_Pin GPIO_PIN_8
 #define DRV_Y_CS_GPIO_Port GPIOG
+#define LASER_PWM_Pin GPIO_PIN_6
+#define LASER_PWM_GPIO_Port GPIOC
 #define LCD_CS_Pin GPIO_PIN_0
 #define LCD_CS_GPIO_Port GPIOD
 #define LCD_RESET_Pin GPIO_PIN_1

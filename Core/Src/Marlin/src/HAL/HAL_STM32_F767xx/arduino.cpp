@@ -44,6 +44,9 @@ void analogWrite(pin_t pin, int pwm_value) {  // 1 - 254: pwm_value, 0: LOW, 255
 		case CONTROLLER_FAN_PIN:
 			HAL_timer_set_PWM(FAN_TIMER_NUM, TIM_CHANNEL_4, pwm_value);
 			break;
+		case SPINDLE_LASER_PWM_PIN:
+			HAL_timer_set_PWM(LASER_TIMER_NUM, TIM_CHANNEL_1, pwm_value);
+			break;
 	}
 
 }

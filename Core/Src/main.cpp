@@ -416,8 +416,8 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOF, DRV_Z1_CS_Pin|DRV_Y_DIR_Pin|DRV_X_DIR_Pin|DRV_Z2_EN_Pin 
-                          |DRV_E0_EN_Pin|DRV_Z1_EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOF, DRV_Z1_CS_Pin|LASER_EN_Pin|DRV_Y_DIR_Pin|DRV_X_DIR_Pin 
+                          |DRV_Z2_EN_Pin|DRV_E0_EN_Pin|DRV_Z1_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOG, LCD_DC_Pin|DRV_X_EN_Pin|DRV_Y_EN_Pin|USB_VBUS_Pin 
@@ -437,18 +437,14 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_BLUE_GPIO_Port, LED_BLUE_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : DRV_Z1_CS_Pin DRV_Z2_EN_Pin DRV_E0_EN_Pin DRV_Z1_EN_Pin */
-  GPIO_InitStruct.Pin = DRV_Z1_CS_Pin|DRV_Z2_EN_Pin|DRV_E0_EN_Pin|DRV_Z1_EN_Pin;
+  /*Configure GPIO pins : DRV_Z1_CS_Pin LASER_EN_Pin DRV_Z2_EN_Pin DRV_E0_EN_Pin 
+                           DRV_Z1_EN_Pin */
+  GPIO_InitStruct.Pin = DRV_Z1_CS_Pin|LASER_EN_Pin|DRV_Z2_EN_Pin|DRV_E0_EN_Pin 
+                          |DRV_Z1_EN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : BED_PROBE_Pin */
-  GPIO_InitStruct.Pin = BED_PROBE_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(BED_PROBE_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DRV_Y_DIR_Pin DRV_X_DIR_Pin */
   GPIO_InitStruct.Pin = DRV_Y_DIR_Pin|DRV_X_DIR_Pin;
@@ -473,6 +469,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : BTN_RT_Pin TOUCH_IRQ_Pin */
+  GPIO_InitStruct.Pin = BTN_RT_Pin|TOUCH_IRQ_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+
   /*Configure GPIO pin : HEAT0_Pin */
   GPIO_InitStruct.Pin = HEAT0_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
@@ -485,6 +487,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : BTN_LEFT_Pin BTN_DOWN_Pin BTN_UP_Pin */
+  GPIO_InitStruct.Pin = BTN_LEFT_Pin|BTN_DOWN_Pin|BTN_UP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DRV_E0_STEP_Pin DRV_E0_CS_Pin */
@@ -514,12 +522,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(DRV_Y_STEP_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : TOUCH_IRQ_Pin */
-  GPIO_InitStruct.Pin = TOUCH_IRQ_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(TOUCH_IRQ_GPIO_Port, &GPIO_InitStruct);
 
 }
 

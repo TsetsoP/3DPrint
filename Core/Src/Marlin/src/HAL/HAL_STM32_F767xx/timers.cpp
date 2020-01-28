@@ -31,7 +31,7 @@
 
 #define NUM_HARDWARE_TIMERS 4
 #define FAN_TIMER_NAME "TIM2"
-
+#define LASER_TIMER_NAME "TIM3"
 //#define PRESCALER 1
 
 // ------------------------
@@ -65,7 +65,6 @@ bool timers_initialized[NUM_HARDWARE_TIMERS] =
 
 void HAL_timer_start(const uint8_t timer_num, const uint32_t frequency)
 {
-
 	if (!timers_initialized[timer_num])
 	{
 		switch (timer_num)
@@ -99,6 +98,7 @@ void HAL_timer_start(const uint8_t timer_num, const uint32_t frequency)
 			break;
 
 		case FAN_TIMER_NUM:
+		{
 			TIM_ClockConfigTypeDef sClockSourceConfig = {0};
 			TIM_MasterConfigTypeDef sMasterConfig = {0};
 			TIM_OC_InitTypeDef sConfigOC = {0};
@@ -134,6 +134,43 @@ void HAL_timer_start(const uint8_t timer_num, const uint32_t frequency)
 			HAL_TIM_PWM_Start(htim2, TIM_CHANNEL_1);
 			HAL_TIM_PWM_Start(htim2, TIM_CHANNEL_3);
 			HAL_TIM_PWM_Start(htim2, TIM_CHANNEL_4);
+		}
+			break;
+
+		case LASER_TIMER_NUM:
+		{
+			TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+			TIM_MasterConfigTypeDef sMasterConfig = {0};
+			TIM_OC_InitTypeDef sConfigOC = {0};
+			TIM_HandleTypeDef *htim3 = &timerConfig[timer_num].timerdef;
+			__HAL_RCC_TIM3_CLK_ENABLE();
+
+			htim3->Instance = LASER_TIMER;
+			htim3->Init.Prescaler = LASER_TIMER_PRESCALE;
+			htim3->Init.CounterMode = TIM_COUNTERMODE_UP;
+			htim3->Init.Period = LASER_TIMER_PERIOD;
+			htim3->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+			htim3->Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+			log_status(HAL_TIM_OC_Init(htim3), LASER_TIMER_NAME);
+
+			sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+			log_status(HAL_TIM_ConfigClockSource(htim3, &sClockSourceConfig), LASER_TIMER_NAME);
+
+			log_status(HAL_TIM_PWM_Init(htim3), LASER_TIMER_NAME);
+
+			sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+			sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+			log_status(HAL_TIMEx_MasterConfigSynchronization(htim3, &sMasterConfig), LASER_TIMER_NAME);
+
+			sConfigOC.OCMode = TIM_OCMODE_PWM1;
+			sConfigOC.Pulse = 0;
+			sConfigOC.OCPolarity = TIM_OCPOLARITY_LOW;
+			sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+			log_status(HAL_TIM_PWM_ConfigChannel(htim3, &sConfigOC, TIM_CHANNEL_1), LASER_TIMER_NAME);
+
+			HAL_TIM_MspPostInit(htim3);
+			HAL_TIM_PWM_Start(htim3, TIM_CHANNEL_1);
+		}
 			break;
 		}
 		timers_initialized[timer_num] = true;

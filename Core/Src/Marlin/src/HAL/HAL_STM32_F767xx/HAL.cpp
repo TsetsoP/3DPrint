@@ -34,7 +34,8 @@ void HAL_init(void)
 	HAL_IOinit();
 	HAL_init_serial();
 	MX_USB_HOST_Init();
-	HAL_timer_start(FAN_TIMER_NUM, 1000);
+	HAL_timer_start(FAN_TIMER_NUM, 0);
+	HAL_timer_start(LASER_TIMER_NUM, 0);
 }
 
 

@@ -37,6 +37,7 @@
 #define STEP_TIMER_NUM 0  // index of timer to use for stepper
 #define TEMP_TIMER_NUM 1  // index of timer to use for temperature
 #define FAN_TIMER_NUM 2  // index of timer to use for extruder FAN0
+#define LASER_TIMER_NUM 3
 
 #define PULSE_TIMER_NUM STEP_TIMER_NUM
 
@@ -54,6 +55,10 @@
 #define FAN_TIMER TIM2
 #define FAN_TIMER_PRESCALE 1000
 #define FAN_TIMER_PERIOD 255
+
+#define LASER_TIMER TIM3
+#define LASER_TIMER_PRESCALE 10
+#define LASER_TIMER_PERIOD 255
 
 #define ENABLE_STEPPER_DRIVER_INTERRUPT() HAL_timer_enable_interrupt(STEP_TIMER_NUM)
 #define DISABLE_STEPPER_DRIVER_INTERRUPT() HAL_timer_disable_interrupt(STEP_TIMER_NUM)
