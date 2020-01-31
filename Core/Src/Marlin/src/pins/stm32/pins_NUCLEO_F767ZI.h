@@ -52,7 +52,7 @@
 // Z Probe (when not Z_MIN_PIN)
 //
 #ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN  F10
+  #define Z_MIN_PROBE_PIN  PF10
 #endif
 
 //
@@ -64,7 +64,7 @@
 #define X_DIR_PIN          PF12
 #define X_ENABLE_PIN       PG4
 #ifndef X_CS_PIN
-  #define X_CS_PIN          PD10
+  #define X_CS_PIN         PD10
 #endif
 
 #define Y_STEP_PIN         PE0
@@ -120,7 +120,7 @@
 //#define TEMP_1_PIN         PC2   // Analog Input
 //#define TEMP_2_PIN         PC1   // Analog Input
 //#define TEMP_3_PIN         PC0   // Analog Input
-#define TEMP_BED_PIN       PF10  // Analog Input
+//#define TEMP_BED_PIN       PF10  // Analog Input
 
 
 //

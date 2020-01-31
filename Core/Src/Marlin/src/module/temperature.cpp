@@ -714,9 +714,9 @@ int16_t Temperature::getHeaterPower(const heater_ind_t heater_id) {
       if (temp_chamber.celsius >= CHAMBER_AUTO_FAN_TEMPERATURE)
         SBI(fanState, pgm_read_byte(&fanBit[CHAMBER_FAN_INDEX]));
     #endif
-
+      //My edit !!!
     #define _UPDATE_AUTO_FAN(P,D,A) do{                  \
-      if (PWM_PIN(P##_AUTO_FAN_PIN) && A < 255)          \
+      if (PWM_PIN(P##_AUTO_FAN_PIN) && A <= 255)          \
         analogWrite(pin_t(P##_AUTO_FAN_PIN), D ? A : 0); \
       else                                               \
         WRITE(P##_AUTO_FAN_PIN, D);                      \
