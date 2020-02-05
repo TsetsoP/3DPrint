@@ -62,6 +62,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define DRV_Z1_CS_Pin GPIO_PIN_3
 #define DRV_Z1_CS_GPIO_Port GPIOF
+#define Y_MIN_Pin GPIO_PIN_4
+#define Y_MIN_GPIO_Port GPIOF
+#define Z_MIN_Pin GPIO_PIN_5
+#define Z_MIN_GPIO_Port GPIOF
 #define LASER_EN_Pin GPIO_PIN_10
 #define LASER_EN_GPIO_Port GPIOF
 #define DRV_Y_DIR_Pin GPIO_PIN_11
@@ -78,6 +82,8 @@ void Error_Handler(void);
 #define LCD_DC_GPIO_Port GPIOG
 #define DRV_E0_DIR_Pin GPIO_PIN_7
 #define DRV_E0_DIR_GPIO_Port GPIOE
+#define X_MIN_Pin GPIO_PIN_8
+#define X_MIN_GPIO_Port GPIOE
 #define DRV_Z1_DIR_Pin GPIO_PIN_9
 #define DRV_Z1_DIR_GPIO_Port GPIOE
 #define BTN_RT_Pin GPIO_PIN_10

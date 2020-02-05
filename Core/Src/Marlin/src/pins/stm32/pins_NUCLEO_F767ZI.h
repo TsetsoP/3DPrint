@@ -38,12 +38,11 @@
 //
 // Limit Switches
 //
-
-#define X_MIN_PIN          -1
+#define X_MIN_PIN          PE8
+#define Y_MIN_PIN          PF4
+#define Z_MIN_PIN          PF5
 //#define X_MAX_PIN          PE10
-#define Y_MIN_PIN          -1
 //#define Y_MAX_PIN          PE8
-#define Z_MIN_PIN          -1
 //#define Z_MAX_PIN          PG0
 //#define E_MIN_PIN          PE2
 //#define E_MAX_PIN          PE3
@@ -51,9 +50,9 @@
 //
 // Z Probe (when not Z_MIN_PIN)
 //
-#ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN  PF10
-#endif
+//#ifndef Z_MIN_PROBE_PIN
+//  #define Z_MIN_PROBE_PIN  PF10
+//#endif
 
 //
 // Steppers
@@ -143,7 +142,7 @@
 
 #if HAS_CUTTER
   #define SPINDLE_LASER_PWM_PIN     PC6
-  #define SPINDLE_LASER_ENA_PIN     PD5
+  #define SPINDLE_LASER_ENA_PIN     PF10
 #endif
 
 //
@@ -165,8 +164,8 @@
 // Servos
 //
 #define SERVO0_PIN         PB0   // XS2-5
-#define SERVO1_PIN         PF7   // XS1-5
-#define SERVO2_PIN         PF8   // XS1-6
+//#define SERVO1_PIN         PF7   // XS1-5
+//#define SERVO2_PIN         PF8   // XS1-6
 
 #define SDSS               PA8
 #define SS_PIN             PA8

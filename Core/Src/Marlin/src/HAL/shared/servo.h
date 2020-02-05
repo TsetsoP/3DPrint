@@ -77,6 +77,8 @@
   #include "../HAL_STM32F1/Servo.h"
 #elif defined(STM32GENERIC) && defined(STM32F4)
   #include "../HAL_STM32_F4_F7/Servo.h"
+#elif defined(STM32GENERIC) && defined(STM32F767xx)
+  #include "../HAL_STM32_F767xx/Servo.h"
 #elif defined(ARDUINO_ARCH_STM32)
   #include "../HAL_STM32/Servo.h"
 #elif defined(ARDUINO_ARCH_ESP32)

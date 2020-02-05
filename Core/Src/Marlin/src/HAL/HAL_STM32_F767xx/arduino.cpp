@@ -71,4 +71,8 @@ int32_t random(int32_t min, int32_t max) {
   return min + rand() % (max - min);
 }
 
+int map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 #endif

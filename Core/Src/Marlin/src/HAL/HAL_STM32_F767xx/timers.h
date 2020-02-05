@@ -38,15 +38,20 @@
 #define TEMP_TIMER_NUM 1  // index of timer to use for temperature
 #define FAN_TIMER_NUM 2  // index of timer to use for extruder FAN0
 #define LASER_TIMER_NUM 3
+#define SERVO_TIMER_NUM 4
 
 #define PULSE_TIMER_NUM STEP_TIMER_NUM
 
+#define TEMP_TIMER TIM7
 #define TEMP_TIMER_FREQUENCY    1000 // temperature interrupt frequency
 #define TEMP_TIMER_PRESCALE     1000 // prescaler for setting Temp timer, 72Khz
+#define TEMP_TIMER_IRQ_N TIM7_IRQn
+#define TEMP_TIMER_HANDLER TC7_Handler
 
+#define STEPPER_TIMER TIM5
 #define STEPPER_TIMER_PRESCALE 54    // was 40,prescaler for setting stepper timer, 2Mhz
 #define STEPPER_TIMER_RATE     (HAL_TIMER_RATE / STEPPER_TIMER_PRESCALE)   // frequency of stepper timer
-#define STEPPER_TIMER_TICKS_PER_US ((STEPPER_TIMER_RATE) / 1000000) // stepper timer ticks per µs
+#define STEPPER_TIMER_TICKS_PER_US ((STEPPER_TIMER_RATE) / 1000000.0) // stepper timer ticks per µs
 
 #define PULSE_TIMER_RATE       STEPPER_TIMER_RATE   // frequency of pulse timer
 #define PULSE_TIMER_PRESCALE   STEPPER_TIMER_PRESCALE
@@ -60,6 +65,12 @@
 #define LASER_TIMER_PRESCALE 10
 #define LASER_TIMER_PERIOD 255
 
+#define SERVO_TIMER TIM10
+#define SERVO_TIMER_PRESCALE 200
+#define SERVO_TIMER_PERIOD 54000
+#define SERVO_TIMER_RATE     (HAL_TIMER_RATE / SERVO_TIMER_PRESCALE)
+#define SERVO_TIMER_TICKS_PER_US ((SERVO_TIMER_RATE) / 1000000)
+
 #define ENABLE_STEPPER_DRIVER_INTERRUPT() HAL_timer_enable_interrupt(STEP_TIMER_NUM)
 #define DISABLE_STEPPER_DRIVER_INTERRUPT() HAL_timer_disable_interrupt(STEP_TIMER_NUM)
 
@@ -72,9 +83,9 @@
 // TODO change this
 
 extern void TC5_Handler();
-extern void TC4_Handler();
+extern void TC7_Handler();
 #define HAL_STEP_TIMER_ISR()  void TC5_Handler()
-#define HAL_TEMP_TIMER_ISR()  void TC4_Handler()
+#define HAL_TEMP_TIMER_ISR()  void TC7_Handler()
 
 // ------------------------
 // Types
@@ -101,7 +112,7 @@ void HAL_timer_enable_interrupt(const uint8_t timer_num);
 void HAL_timer_disable_interrupt(const uint8_t timer_num);
 bool HAL_timer_interrupt_enabled(const uint8_t timer_num);
 void HAL_timer_set_PWM(const uint8_t timer_num, uint32_t chanel, const uint32_t compare);
-
+void HAL_timer_set_PWM_uS(const uint8_t timer_num, uint32_t chanel, const uint32_t tau);
 void HAL_timer_set_compare(const uint8_t timer_num, const uint32_t compare);
 hal_timer_t HAL_timer_get_compare(const uint8_t timer_num);
 uint32_t HAL_timer_get_count(const uint8_t timer_num);

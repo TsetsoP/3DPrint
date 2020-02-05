@@ -52,6 +52,7 @@ uint16_t analogRead(pin_t);
 
 int32_t random(int32_t);
 int32_t random(int32_t, int32_t);
+int map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
 
 using std::memcpy;
 #define memcpy_P memcpy

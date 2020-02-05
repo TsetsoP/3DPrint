@@ -646,8 +646,8 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.      //My edit!
-#define Y_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.      //My edit!
+#define X_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.      //My edit!
+#define Y_MIN_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.      //My edit!
 #define Z_MIN_ENDSTOP_INVERTING true // Set to true to invert the logic of the endstop.      //My edit!
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
@@ -881,7 +881,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#define BLTOUCH
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1046,7 +1046,7 @@
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
 #define INVERT_X_DIR false
-#define INVERT_Y_DIR false      //My edit!
+#define INVERT_Y_DIR true      //My edit!
 #define INVERT_Z_DIR false
 
 // @section extruder
@@ -1079,8 +1079,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 350      //My edit!
-#define Y_BED_SIZE 380      //My edit!
+#define X_BED_SIZE 220      //My edit!
+#define Y_BED_SIZE 250      //My edit!
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1191,7 +1191,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -1206,7 +1206,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-//#define DEBUG_LEVELING_FEATURE
+#define DEBUG_LEVELING_FEATURE
 
 #if ANY(MESH_BED_LEVELING, AUTO_BED_LEVELING_BILINEAR, AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -1297,7 +1297,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-//#define LCD_BED_LEVELING     //My edit
+#define LCD_BED_LEVELING     //My edit
 
 #if ENABLED(LCD_BED_LEVELING)
   #define MESH_EDIT_Z_STEP  0.025 // (mm) Step size while manually probing Z axis.
