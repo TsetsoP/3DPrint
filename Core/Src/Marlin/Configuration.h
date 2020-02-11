@@ -749,7 +749,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 600, 600, 120, 5000 }      //My edit!
+#define DEFAULT_MAX_ACCELERATION      { 600, 600, 20, 5000 }      //My edit!
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -788,7 +788,7 @@
   #endif
 #endif
 
-#define DEFAULT_EJERK    3  // May be used by Linear Advance
+#define DEFAULT_EJERK    2  // May be used by Linear Advance
 
 /**
  * Junction Deviation Factor
@@ -945,7 +945,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { 27.6, 10.04, -0.60 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
