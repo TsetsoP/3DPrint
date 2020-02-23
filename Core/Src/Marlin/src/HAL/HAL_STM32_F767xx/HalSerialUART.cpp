@@ -1,10 +1,12 @@
 #include "HAL.h"
 #if defined(STM32GENERIC) && defined(STM32F767xx)
 
+#include<stdio.h>
+
 #define TIME_OUT  1000
 
 HalSerialUART::HalSerialUART(USART_TypeDef *USART) :
-		USART(USART), bufferPos(0), rxDataSize(0), hasRxData(false)
+		USART(USART), rxBufferPos(0), rxDataSize(0), hasRxData(false)
 {
 
 }
@@ -15,15 +17,15 @@ HalSerialUART::~HalSerialUART()
 }
 void HalSerialUART::UART_RxCpltCallback()
 {
-	buffer[bufferPos] = (uint16_t) READ_REG(huart.Instance->RDR);
-	if (buffer[bufferPos] == '\n' || buffer[bufferPos] == '\r'
-			|| bufferPos == UART_BUFFER_SIZE - 1)
+	rxBuffer[rxBufferPos] = (uint16_t) READ_REG(huart.Instance->RDR);
+	if (rxBuffer[rxBufferPos] == '\n' || rxBuffer[rxBufferPos] == '\r'
+			|| rxBufferPos == UART_BUFFER_SIZE - 1)
 	{
 		finishRxTransffer();
 	}
 	else
 	{
-		bufferPos++;
+		rxBufferPos++;
 	}
 
 }
@@ -59,9 +61,9 @@ int HalSerialUART::peek()
 }
 int HalSerialUART::read()
 {
-	uint8_t data = this->buffer[bufferPos];
-	bufferPos++;
-	if (bufferPos == rxDataSize)
+	uint8_t data = this->rxBuffer[rxBufferPos];
+	rxBufferPos++;
+	if (rxBufferPos == rxDataSize)
 	{
 		restartRxTransffer();
 	}
@@ -99,15 +101,14 @@ uint8_t HalSerialUART::availableForWrite(void)
 void HalSerialUART::flushTX(void)
 {
 }
-void HalSerialUART::printf(const char *format, ...)
-{
-}
 void HalSerialUART::print_bin(uint32_t value, uint8_t num_digits)
 {
 }
 
 void HalSerialUART::print(const char value[])
 {
+	int lenght = strlen(value);
+	HAL_UART_Transmit(&huart, (uint8_t*) value, lenght, TIME_OUT);
 }
 void HalSerialUART::print(char value, int nbase)
 {
@@ -117,6 +118,28 @@ void HalSerialUART::print(unsigned char value, int nbase)
 }
 void HalSerialUART::print(int value, int nbase)
 {
+	int lenght = 0;
+	switch(nbase) {
+
+	case 10:
+	case 0:
+		lenght = snprintf(numberBuffer, NUMBER_BUFFER_SIZE, "%d", value);
+		break;
+
+	case 8:
+		lenght = snprintf(numberBuffer, NUMBER_BUFFER_SIZE, "%o", value);
+		break;
+
+	case 16:
+		lenght = snprintf(numberBuffer, NUMBER_BUFFER_SIZE, "%x", value);
+		break;
+	}
+
+	if (lenght > 0)
+	{
+		HAL_UART_Transmit(&huart, (uint8_t*)numberBuffer, lenght, TIME_OUT);
+	}
+
 }
 void HalSerialUART::print(unsigned int value, int nbase)
 {
@@ -129,11 +152,13 @@ void HalSerialUART::print(unsigned long value, int nbase)
 }
 void HalSerialUART::print(float value, int round)
 {
+	snprintf(formatBuffer, FORMAT_BUFFER_SIZE,"%s%df", "%.", round);
+	int lenght = snprintf(numberBuffer, NUMBER_BUFFER_SIZE, formatBuffer, value);
+	HAL_UART_Transmit(&huart, (uint8_t*)numberBuffer, lenght, TIME_OUT);
 }
 void HalSerialUART::print(double value, int round)
 {
 }
-
 void HalSerialUART::println(const char value[])
 {
 }
@@ -193,7 +218,7 @@ void HalSerialUART::errroHandler()
 void HalSerialUART::restartRxTransffer()
 {
 	hasRxData = false;
-	bufferPos = 0;
+	rxBufferPos = 0;
 	rxDataSize = 0;
 	huart.RxISR = HAL_UART_RxCpltCallback;
 	SET_BIT(huart.Instance->CR3, USART_CR3_EIE);
@@ -204,8 +229,8 @@ void HalSerialUART::restartRxTransffer()
 void HalSerialUART::finishRxTransffer()
 {
 	hasRxData = true;
-	rxDataSize = bufferPos + 1;
-	bufferPos = 0;
+	rxDataSize = rxBufferPos + 1;
+	rxBufferPos = 0;
 	/* Disable the UART Parity Error Interrupt and RXNE interrupts */
 	CLEAR_BIT(huart.Instance->CR1, (USART_CR1_RXNEIE | USART_CR1_PEIE));
 

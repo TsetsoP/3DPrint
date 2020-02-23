@@ -81,6 +81,8 @@ public:
 class HalSerialUART
 {
 #define UART_BUFFER_SIZE 64
+#define NUMBER_BUFFER_SIZE 18
+#define FORMAT_BUFFER_SIZE 6
 public:
 
   #if ENABLED(EMERGENCY_PARSER)
@@ -107,7 +109,6 @@ public:
 	void flush();
 	uint8_t availableForWrite(void);
 	void flushTX(void);
-	void printf(const char *format, ...);
 	void print_bin(uint32_t value, uint8_t num_digits);
 
 	void print(const char value[]);
@@ -142,11 +143,13 @@ private:
 	void finishRxTransffer();
 	USART_TypeDef *USART;
 	UART_HandleTypeDef huart;
-	uint8_t buffer[UART_BUFFER_SIZE];
-	uint8_t bufferPos;
+	uint8_t rxBuffer[UART_BUFFER_SIZE];
+	uint8_t rxBufferPos;
 	uint16_t rxDataSize;
 	bool hasRxData;
 
+	char numberBuffer[NUMBER_BUFFER_SIZE];
+	char formatBuffer[FORMAT_BUFFER_SIZE];
 
 };
 

@@ -101,9 +101,6 @@ extern SpiStm32F7xx SPI;
 #define cli() __disable_irq()
 #define sei() __enable_irq()
 
-// On AVR this is in math.h?
-//#define square(x) ((x)*(x))
-
 #ifndef strncpy_P
   #define strncpy_P(dest, src, num) strncpy((dest), (src), (num))
 #endif
@@ -111,15 +108,6 @@ extern SpiStm32F7xx SPI;
 // Fix bug in pgm_read_ptr
 #undef pgm_read_ptr
 #define pgm_read_ptr(addr) (*(addr))
-
-
-
-// ------------------------
-// Public Variables
-// ------------------------
-
-// Result of last ADC conversion
-extern uint16_t HAL_adc_result;
 
 // ------------------------
 // Public functions
@@ -184,7 +172,8 @@ void eeprom_update_block (const void *__src, void *__dst, size_t __n);
 #define HAL_ANALOG_SELECT(pin) pinMode(pin, INPUT)
 
 #define HAL_START_ADC(pin)  HAL_adc_start_conversion(pin)
-#define HAL_READ_ADC()      HAL_adc_result
+#define HAL_READ_ADC()      HAL_adc_get_result()
+#define HAL_ADC_VALUE(index)  HAL_adc_get_result(index)
 #define HAL_ADC_READY()     true
 
 #define GET_PIN_MAP_PIN(index) index

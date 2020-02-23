@@ -956,6 +956,8 @@ private:
     static void M1000();
   #endif
 
+   static void M1001();
+
   #if ENABLED(MAX7219_GCODE)
     static void M7219();
   #endif

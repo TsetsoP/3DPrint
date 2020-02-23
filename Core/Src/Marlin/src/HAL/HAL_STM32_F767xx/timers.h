@@ -23,10 +23,6 @@
 
 #include <stdint.h>
 
-// ------------------------
-// Defines
-// ------------------------
-
 #define FORCE_INLINE __attribute__((always_inline)) inline
 
 #define hal_timer_t uint32_t  // TODO: One is 16-bit, one 32-bit - does this need to be checked?
@@ -87,25 +83,11 @@ extern void TC7_Handler();
 #define HAL_STEP_TIMER_ISR()  void TC5_Handler()
 #define HAL_TEMP_TIMER_ISR()  void TC7_Handler()
 
-// ------------------------
-// Types
-// ------------------------
-
 typedef struct {
   TIM_HandleTypeDef timerdef;
   IRQn_Type   IRQ_Id;
   uint32_t callback;
 } tTimerConfig;
-
-// ------------------------
-// Public Variables
-// ------------------------
-
-//extern const tTimerConfig timerConfig[];
-
-// ------------------------
-// Public functions
-// ------------------------
 
 void HAL_timer_start(const uint8_t timer_num, const uint32_t frequency);
 void HAL_timer_enable_interrupt(const uint8_t timer_num);
