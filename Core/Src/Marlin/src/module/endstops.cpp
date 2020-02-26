@@ -51,7 +51,9 @@
 Endstops endstops;
 
 // private:
-
+#if ENABLED(LASER_PROBE)
+	bool Endstops::xyLaserProbeEnabled = false;
+#endif
 bool Endstops::enabled, Endstops::enabled_globally; // Initialized by settings.load()
 volatile uint8_t Endstops::hit_state;
 
@@ -309,6 +311,12 @@ void Endstops::enable_globally(const bool onoff) {
   enabled_globally = enabled = onoff;
   resync();
 }
+
+#if ENABLED(LASER_PROBE)
+void Endstops::enableXYLaserProbre(const bool isEnabled) {
+	xyLaserProbeEnabled = isEnabled;
+}
+#endif //LASER_PROBE
 
 // Enable / disable endstop checking
 void Endstops::enable(const bool onoff) {
@@ -683,6 +691,14 @@ void Endstops::update() {
 
   #endif
 
+  #if ENABLED(LASER_PROBE)
+	if (xyLaserProbeEnabled && HAL_ADC_VALUE(LASER_VAL_INDEX) <= LASER_PROBE_THRESHOLD) {
+		if (stepper.axis_is_moving(X_AXIS) || stepper.axis_is_moving(Y_AXIS)) {
+			SBI(live_state, X_Y_LASER_PROBE);
+		}
+	}
+  #endif
+
   // Test the current status of an endstop
   #define TEST_ENDSTOP(ENDSTOP) (TEST(state(), ENDSTOP))
 
@@ -764,6 +780,18 @@ void Endstops::update() {
       G38_did_trigger = true;
     }
   #endif
+
+	#if ENABLED(LASER_PROBE)
+	  if (xyLaserProbeEnabled && TEST_ENDSTOP(_ENDSTOP(X_Y, LASER_PROBE))) {
+		  if (stepper.axis_is_moving(X_AXIS)) {
+			  _ENDSTOP_HIT(X, MIN);
+			  planner.endstop_triggered(X_AXIS);
+		  } else if (stepper.axis_is_moving(Y_AXIS)) {
+			  _ENDSTOP_HIT(Y, MIN);
+			  planner.endstop_triggered(Y_AXIS);
+		  }
+	  }
+	#endif
 
   // Now, we must signal, after validation, if an endstop limit is pressed or not
   if (stepper.axis_is_moving(X_AXIS)) {

@@ -31,6 +31,9 @@
 enum EndstopEnum : char {
   X_MIN,  Y_MIN,  Z_MIN,  Z_MIN_PROBE,
   X_MAX,  Y_MAX,  Z_MAX,
+#if ENABLED(LASER_PROBE)
+  X_Y_LASER_PROBE,
+#endif
   X2_MIN, X2_MAX,
   Y2_MIN, Y2_MAX,
   Z2_MIN, Z2_MAX,
@@ -71,6 +74,9 @@ class Endstops {
       static uint8_t endstop_poll_count;    // Countdown from threshold for polling
     #endif
 
+	#if ENABLED(LASER_PROBE)
+      static bool xyLaserProbeEnabled;
+	#endif
   public:
     Endstops() {};
 
@@ -156,6 +162,10 @@ class Endstops {
       static volatile bool z_probe_enabled;
       static void enable_z_probe(const bool onoff=true);
     #endif
+
+   #if ENABLED(LASER_PROBE)
+      void enableXYLaserProbre(const bool isEnabled);
+   #endif
 
     static void resync();
 

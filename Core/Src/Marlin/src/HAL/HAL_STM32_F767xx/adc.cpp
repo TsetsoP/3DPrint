@@ -86,7 +86,7 @@ uint16_t HAL_adc_get_result(void)
 
 uint16_t HAL_adc_get_result(uint8_t valIndex)
 {
-	if (ADC_BUFFER_SIZE < valIndex) {
+	if (valIndex < ADC_BUFFER_SIZE) {
 		return adc_result[valIndex];
 	}
 	return 0;

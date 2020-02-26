@@ -2244,3 +2244,9 @@
 
 // Allow servo angle to be edited and saved to EEPROM
 //#define EDITABLE_SERVO_ANGLES
+
+#define LASER_PROBE
+#if ENABLED(LASER_PROBE)
+	#define  LASER_PROBE_THRESHOLD 300
+#endif
+
