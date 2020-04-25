@@ -164,7 +164,8 @@ class Endstops {
     #endif
 
    #if ENABLED(LASER_PROBE)
-      void enableXYLaserProbre(const bool isEnabled);
+      static void enableXYLaserProbre(const bool isEnabled);
+      static bool isLaserProbreTriggered();
    #endif
 
     static void resync();

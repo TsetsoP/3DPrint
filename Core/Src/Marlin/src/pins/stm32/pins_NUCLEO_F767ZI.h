@@ -115,7 +115,7 @@
 //
 // Temperature Sensors
 //
-#define TEMP_0_PIN         PA4   // Analog Input
+#define TEMP_0_PIN         PA6   // Analog Input
 //#define TEMP_1_PIN         PC2   // Analog Input
 //#define TEMP_2_PIN         PC1   // Analog Input
 //#define TEMP_3_PIN         PC0   // Analog Input

@@ -316,6 +316,19 @@ void Endstops::enable_globally(const bool onoff) {
 void Endstops::enableXYLaserProbre(const bool isEnabled) {
 	xyLaserProbeEnabled = isEnabled;
 }
+
+bool Endstops::isLaserProbreTriggered() {
+	if (xyLaserProbeEnabled && HAL_ADC_VALUE(LASER_VAL_INDEX) <= LASER_PROBE_THRESHOLD) {
+
+		if (HAL_ADC_VALUE(LASER_VAL_INDEX) <= LASER_PROBE_THRESHOLD) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	return false;
+}
+
 #endif //LASER_PROBE
 
 // Enable / disable endstop checking
@@ -692,10 +705,12 @@ void Endstops::update() {
   #endif
 
   #if ENABLED(LASER_PROBE)
-	if (xyLaserProbeEnabled && HAL_ADC_VALUE(LASER_VAL_INDEX) <= LASER_PROBE_THRESHOLD) {
+	if (isLaserProbreTriggered()) {
 		if (stepper.axis_is_moving(X_AXIS) || stepper.axis_is_moving(Y_AXIS)) {
 			SBI(live_state, X_Y_LASER_PROBE);
 		}
+	} else {
+		CBI(live_state, X_Y_LASER_PROBE);
 	}
   #endif
 

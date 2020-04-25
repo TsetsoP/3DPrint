@@ -110,9 +110,10 @@ void GcodeSuite::M1001()
 	pos.y = 0;
 	endstops.enable(true);
 	endstops.enableXYLaserProbre(true);
-	do_blocking_move_to(pos, 600);
+	HAL_adc_start(LASER_ADC, true);
+	do_blocking_move_to(pos, 50);
 	endstops.not_homing();
 	endstops.enableXYLaserProbre(false);
-
+	HAL_adc_start(LASER_ADC, false);
 
 }
