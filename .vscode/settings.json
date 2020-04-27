@@ -1,0 +1,13 @@
+{
+    "cmake.configureOnOpen": true,
+    "cmake.configureSettings": {
+        //"CMAKE_MAKE_PROGRAM": "d:/Frameworks/ninja.exe",
+        "CMAKE_MAKE_PROGRAM": "D:\\Frameworks\\make\\bin\\make.exe"
+    },
+    "cmake.preferredGenerators": [
+        "Unix Makefiles",
+        "Ninja",
+    ],
+    "cmake.generator": "Unix Makefiles",
+    "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
+}
