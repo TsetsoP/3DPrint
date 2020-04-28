@@ -80,14 +80,17 @@ file(GLOB_RECURSE
 file(GLOB_RECURSE 
 	 MAIN_SOURCE
      ${LIBRARY_SOURCE}
-	"Core/src/*.c"
-    "Core/src/*.cpp"
-    "Core/Src/Marlinsrc/*.cpp"
-    "Drivers/CMSIS/Core_A/"
+	"Core/Src/*.c"
+    "Core/Src/*.cpp"
+    "Core/Src/Marlin/src/*.cpp"
+    "Core/Src/Marlin/src/*.c"
+    "Core/Src/TMCDriver/*.cpp"
+    "Core/Src/u8glib/*.c"
+    "Drivers/CMSIS/Core_A/*.c"
     "Drivers/STM32F7xx_HAL_Driver/Src/*.c"
     "USB_HOST/*.c"
     "Middlewares/ST/STM32_USB_Host_Library/*.c"
-    "startup/startup_stm32f767xx.s"
+    "Startup/startup_stm32f767zitx.s"
 )
 
 # TODO: Add your project linker scripts here (if you have any)

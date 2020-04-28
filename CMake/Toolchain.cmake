@@ -38,8 +38,8 @@ elseif (CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
 
 elseif (CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Setting up Debug flags.")
-    set(OPTIMISATION	    "-Og")
-    set(DEBUG               "-g3  -g ")
+    set(OPTIMISATION	    "-O0")
+    set(DEBUG               "-g3  ")
 
 elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     message("Setting up RelWithDebInfo flags.")

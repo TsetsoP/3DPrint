@@ -102,21 +102,12 @@ void HAL_adc_start(adc_index index, bool isStarted)
 
 	case LASER_ADC:
 		if (isStarted)
-		{__HAL_ADC_ENABLE(&hadc2);
+		{
 			lmsFilterInit(&filterState, filterBuffer, NUM_TAPS, FILTER_COEF);
-		    /*if ((hadc2.Instance->CR2 & ADC_CR2_ADON) != ADC_CR2_ADON)
-			{
-				__HAL_ADC_ENABLE(&hadc2);
-				uint32_t counter = (ADC_STAB_DELAY_US * (SystemCoreClock / 1000000));
-				while (counter != 0)
-				{
-					counter--;
-				}
-			}*/
+		    __HAL_ADC_ENABLE(&hadc2);
 			__HAL_ADC_CLEAR_FLAG(&hadc2, ADC_FLAG_EOC | ADC_FLAG_OVR);
 			__HAL_ADC_ENABLE_IT(&hadc2, (ADC_IT_EOC | ADC_IT_OVR));
             hadc2.Instance->CR2 |= (uint32_t)ADC_CR2_SWSTART;
-
 			//card.mount();
 			//card.openFileWrite("rawdata.txt");
 		}
