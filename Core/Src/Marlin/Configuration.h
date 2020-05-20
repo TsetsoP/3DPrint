@@ -407,7 +407,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 55      //My edit!
+#define TEMP_SENSOR_0 13 //55      //My edit!
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -946,7 +946,7 @@
  *
  * Specify a Probe position as { X, Y, Z }
  */
-#define NOZZLE_TO_PROBE_OFFSET { 27.6, 10.04, -0.55 }
+#define NOZZLE_TO_PROBE_OFFSET { 27.6, 10.04, -0.50 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -2245,8 +2245,10 @@
 // Allow servo angle to be edited and saved to EEPROM
 //#define EDITABLE_SERVO_ANGLES
 
-#define LASER_PROBE
+#define LASER_PROBE true
 #if ENABLED(LASER_PROBE)
-	#define  LASER_PROBE_THRESHOLD 600
+	#define  LASER_PROBE_THRESHOLD 500
+	#define  LASER_OFFSET_X  -22.8000
+	#define  LASER_OFFSET_Y -4.799998
 #endif
 

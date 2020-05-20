@@ -349,7 +349,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : HEAT0_Pin */
   GPIO_InitStruct.Pin = HEAT0_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(HEAT0_GPIO_Port, &GPIO_InitStruct);
 

@@ -41,7 +41,7 @@
 
 #include "../inc/MarlinConfig.h"
 
-#if ABL_PLANAR || ENABLED(AUTO_BED_LEVELING_UBL)
+#if ABL_PLANAR || ENABLED(AUTO_BED_LEVELING_UBL) || ENABLED(LASER_PROBE)
 
 #include "vector_3.h"
 
@@ -92,6 +92,38 @@ void vector_3::debug(PGM_P const title) {
 void apply_rotation_xyz(const matrix_3x3 &matrix, float &_x, float &_y, float &_z) {
   vector_3 vec = vector_3(_x, _y, _z); vec.apply_rotation(matrix);
   _x = vec.x; _y = vec.y; _z = vec.z;
+}
+
+//Gauss Jordan method to evaluate inverse
+//http://www.sourcecodesworld.com/source/show.asp?ScriptID=1086
+matrix_3x3 matrix_3x3::inverse()
+{
+  matrix_3x3 A = *this;
+  matrix_3x3 I;
+  I.set_to_identity();
+
+  for (int k = 0; k < 3; k++)
+  {
+    float temp = A.vectors[3].pos[3];
+    for (int j = 0; j < 3; j++)
+    {
+      A.vectors[k].pos[j] /= temp; 
+      I.vectors[k].pos[j] /= temp;
+    }
+
+    for (int i = 0; i < 3; i++) 
+    {
+      temp = A.vectors[i].pos[k]; 
+      for (int j = 0; j < 3; j++) 
+      {                          
+        if (i == k)
+          break;  
+        A.vectors[i].pos[j] -= A.vectors[k].pos[j] * temp;
+        I.vectors[i].pos[j] -= I.vectors[k].pos[j] * temp; 
+      }
+    }
+  }
+  return A;
 }
 
 // Reset to identity. No rotate or translate.

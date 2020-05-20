@@ -39,7 +39,7 @@
   #include "delta.h"
 #endif
 
-#if ABL_PLANAR
+#if ABL_PLANAR || ENABLED(LASER_PROBE)
   #include "../libs/vector_3.h" // for matrix_3x3
 #endif
 
@@ -350,6 +350,11 @@ class Planner {
       volatile static uint32_t block_buffer_runtime_us; //Theoretical block buffer runtime in µs
     #endif
 
+    #if ENABLED(LASER_PROBE)
+      static matrix_3x3 rotation_matrix;
+      static bool is_rotation_applyed;
+    #endif //LASER_PROBE
+
   public:
 
     /**
@@ -489,6 +494,11 @@ class Planner {
       }
     #endif
 
+    #if ENABLED(LASER_PROBE)
+      static void apply_rotation(xyz_pos_t &raw);
+      static void unapply_rotation(xyz_pos_t &raw);
+    #endif //LASER_PROBE
+
     #if ENABLED(FWRETRACT)
       static void apply_retract(float &rz, float &e);
       FORCE_INLINE static void apply_retract(xyze_pos_t &raw) { apply_retract(raw.z, raw.e); }
@@ -516,6 +526,9 @@ class Planner {
         #if ENABLED(FWRETRACT)
           apply_retract(pos);
         #endif
+        #if ENABLED(LASER_PROBE)
+          apply_rotation(pos);
+        #endif
       }
 
       FORCE_INLINE static void unapply_modifiers(xyze_pos_t &pos
@@ -537,6 +550,9 @@ class Planner {
         #if ENABLED(SKEW_CORRECTION)
           unskew(pos);
         #endif
+		#if ENABLED(LASER_PROBE)
+				unapply_rotation(pos);
+		#endif
       }
     #endif // HAS_POSITION_MODIFIERS
 
@@ -622,6 +638,11 @@ class Planner {
      * Add a block to the buffer that just updates the position
      */
     static void buffer_sync_block();
+
+    #if ENABLED(LASER_PROBE)
+      static void set_space_rotation(matrix_3x3 &rotation);
+      static void reset_rotatation();
+    #endif //LASER_PROBE
 
   #if IS_KINEMATIC
     private:

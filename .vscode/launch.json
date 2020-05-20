@@ -6,16 +6,16 @@
     "configurations": [
         {
             "name": "Debug(openocd)",
-            //"preLaunchTask": "${defaultBuildTask}",
+            "preLaunchTask": "${defaultBuildTask}",
             "cwd": "${workspaceRoot}",
             "executable": "${workspaceRoot}\\build\\${workspaceFolderBasename}.elf",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
             "svdFile": "${workspaceFolder}\\micro\\STM32F767.svd",
-            "configFiles": ["${workspaceRoot}\\3DPrint.elf.cfg"],
-            //"configFiles": ["board/st_nucleo_f7.cfg"],
-            "debuggerArgs": []
+            //"configFiles": ["${workspaceRoot}\\3DPrint.elf.cfg"],
+            "configFiles": ["board/st_nucleo_f7.cfg"],
+            "debuggerArgs": ["ulimit" ,"-d", "unlimited"]
         }
     ]
 }

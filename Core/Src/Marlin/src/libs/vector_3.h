@@ -78,9 +78,18 @@ struct matrix_3x3 {
   static matrix_3x3 create_from_rows(const vector_3 &row_0, const vector_3 &row_1, const vector_3 &row_2);
   static matrix_3x3 create_look_at(const vector_3 &target);
   static matrix_3x3 transpose(const matrix_3x3 &original);
-
+   
+  matrix_3x3 inverse();
   void set_to_identity();
-
+  
+   FORCE_INLINE const matrix_3x3& operator=(const matrix_3x3 &m)
+   {
+     vectors[0] = m.vectors[0];
+     vectors[1] = m.vectors[1];
+     vectors[2] = m.vectors[2];
+     return *this;
+   }
+  
   void debug(PGM_P const title);
 };
 

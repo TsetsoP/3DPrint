@@ -38,19 +38,11 @@ set(TYPE EXECUTABLE)
 
 # Add your project #defines here
 # These are included as #defines in the project
-add_compile_definitions( ${TARGET} USE_STDPERIPH_DRIVER HSE_VALUE=48000000 )
+# add_compile_definitions( ${TARGET} USE_STDPERIPH_DRIVER HSE_VALUE=48000000 )
 
 #
 # TODO: Add any additional include directories here
 include_directories(
-	# "Core/Inc"
-    # "Drivers/CMSIS/Core/Include"
-    # "Drivers/CMSIS/Core_A/Include"
-    # "Drivers/CMSIS/Device/ST/STM32F7xx/Include" 
-    # "Drivers/CMSIS/Include"
-    # "Drivers/STM32F7xx_HAL_Driver/Inc"
-
-
     "Drivers/CMSIS/Include"
     "Drivers/CMSIS/Device/ST/STM32F7xx/Include"
     "Core/Inc"
@@ -97,7 +89,7 @@ file(GLOB_RECURSE
 # Add all linker scripts to the linker command
 file(GLOB_RECURSE
 	LK_SCRIPTS
-	"*.ld"
+	"*_FLASH.ld"
 )
 #
 

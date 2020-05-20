@@ -184,6 +184,11 @@ float Planner::steps_to_mm[XYZE_N];           // (mm) Millimeters per step
   constexpr bool Planner::leveling_active;
 #endif
 
+#if ENABLED(LASER_PROBE)
+  matrix_3x3 Planner::rotation_matrix;
+  bool Planner::is_rotation_applyed;
+#endif //LASER_PROBE
+
 skew_factor_t Planner::skew_factor; // Initialized by settings.load()
 
 #if ENABLED(AUTOTEMP)
@@ -250,6 +255,7 @@ void Planner::init() {
   #endif
   clear_block_buffer();
   delay_before_delivering = 0;
+  reset_rotatation();
 }
 
 #if ENABLED(S_CURVE_ACCELERATION)
@@ -2871,6 +2877,37 @@ void Planner::set_max_jerk(const AxisEnum axis, float targetValue) {
     UNUSED(axis); UNUSED(targetValue);
   #endif
 }
+
+#if ENABLED(LASER_PROBE)
+  void Planner::set_space_rotation(matrix_3x3 &rotation)
+  {
+    rotation_matrix = rotation;
+    is_rotation_applyed = true;
+  }
+
+  void Planner::reset_rotatation()
+  {
+    is_rotation_applyed = false;
+  }
+
+  void Planner::apply_rotation(xyz_pos_t &raw)
+  {
+    if (is_rotation_applyed)
+    {
+      apply_rotation_xyz(rotation_matrix, raw);
+    }
+  }
+
+  void Planner::unapply_rotation(xyz_pos_t &raw)
+  {
+    if (is_rotation_applyed)
+    {
+      matrix_3x3  inv_matrix = rotation_matrix.inverse();
+      apply_rotation_xyz(inv_matrix, raw);
+    }
+  }
+
+#endif //LASER_PROBE
 
 #if HAS_SPI_LCD
 
