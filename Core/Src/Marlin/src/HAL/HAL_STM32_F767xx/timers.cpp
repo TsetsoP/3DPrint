@@ -39,14 +39,6 @@
 tTimerConfig timerConfig[NUM_HARDWARE_TIMERS];
 extern "C" void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
-static void log_status(HAL_StatusTypeDef status, const char *module)
-{
-	if (status != HAL_OK)
-	{
-		Error_Handler(module, &status);
-	}
-}
-
 static void set_timer_ferq(const uint8_t timer_num, const uint32_t frequency)
 {
 	timerConfig[timer_num].timerdef.Init.Period = (((HAL_TIMER_RATE)

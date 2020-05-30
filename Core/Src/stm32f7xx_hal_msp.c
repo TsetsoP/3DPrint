@@ -343,19 +343,19 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef* hspi)
     PG13     ------> SPI6_SCK
     PB5     ------> SPI6_MOSI 
     */
-    GPIO_InitStruct.Pin = TOUCH_MISO_Pin|TOUCH_CLK_Pin;
+    GPIO_InitStruct.Pin = FLASH_MISO_Pin|FALSH_CLK_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF5_SPI6;
     HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
-    GPIO_InitStruct.Pin = TOUCH_MOSI_Pin;
+    GPIO_InitStruct.Pin = FLASH_MOSI_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF8_SPI6;
-    HAL_GPIO_Init(TOUCH_MOSI_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(FLASH_MOSI_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN SPI6_MspInit 1 */
 
@@ -423,9 +423,9 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef* hspi)
     PG13     ------> SPI6_SCK
     PB5     ------> SPI6_MOSI 
     */
-    HAL_GPIO_DeInit(GPIOG, TOUCH_MISO_Pin|TOUCH_CLK_Pin);
+    HAL_GPIO_DeInit(GPIOG, FLASH_MISO_Pin|FALSH_CLK_Pin);
 
-    HAL_GPIO_DeInit(TOUCH_MOSI_GPIO_Port, TOUCH_MOSI_Pin);
+    HAL_GPIO_DeInit(FLASH_MOSI_GPIO_Port, FLASH_MOSI_Pin);
 
   /* USER CODE BEGIN SPI6_MspDeInit 1 */
 

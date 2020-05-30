@@ -31,6 +31,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "SPI.h"
+#include "HAL/SpiStm32F7xx.h"
 
 #if ENABLED(TOUCH_BUTTONS)
 	#include "TSC2046.h"
@@ -180,4 +181,5 @@ void eeprom_update_block (const void *__src, void *__dst, size_t __n);
 #define GET_PIN_MAP_INDEX(pin) pin
 #define PARSED_PIN_INDEX(code, dval) parser.intval(code, dval)
 
+void log_status(HAL_StatusTypeDef status, const char *module);
 void Error_Handler(const char *module, HAL_StatusTypeDef *hal_error);

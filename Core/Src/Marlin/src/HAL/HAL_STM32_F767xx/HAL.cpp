@@ -3,6 +3,7 @@
 #include "../../inc/MarlinConfig.h"
 #include "../shared/Delay.h"
 #include "HAL.h"
+#include "w25qxx/w25qxx.h"
 
 #if HAS_USB_SERIAL
 HalSerialUSB usb_serial;
@@ -37,6 +38,15 @@ void HAL_init(void)
 	HAL_timer_start(FAN_TIMER_NUM, 0);
 	HAL_timer_start(LASER_TIMER_NUM, 0);
 	HAL_timer_start(SERVO_TIMER_NUM, 0);
+
+#if ENABLED(EEPROM_SETTINGS)
+	Spi_flash_init();
+	W25qxx_Init(HAL_Spi_get(FLASH_SPI_INDEX));
+#endif //TOUCH_BUTTONS
+
+#if ENABLED(TOUCH_BUTTONS)
+	Spi_touch_init();
+#endif //TOUCH_BUTTONS
 }
 
 
@@ -56,6 +66,14 @@ uint8_t HAL_get_reset_source(void) {
   if (__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST)  != RESET) return RST_EXTERNAL;
   if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST)  != RESET) return RST_POWER_ON;
   return 0;
+}
+
+void log_status(HAL_StatusTypeDef status, const char *module)
+{
+	if (status != HAL_OK)
+	{
+		Error_Handler(module, &status);
+	}
 }
 
 void Error_Handler(const char *module, HAL_StatusTypeDef *hal_error)

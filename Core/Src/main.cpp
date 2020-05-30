@@ -5,9 +5,6 @@ extern void loop();
 
 CRC_HandleTypeDef hcrc;
 
-SPI_HandleTypeDef hspi4;
-SPI_HandleTypeDef hspi5;
-SPI_HandleTypeDef hspi6;
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,10 +17,7 @@ void SystemClock_Config(void);
 #endif
 
 static void MX_GPIO_Init(void);
-static void MX_SPI4_Init(void);
-static void MX_SPI5_Init(void);
 static void MX_CRC_Init(void);
-static void MX_SPI6_Init(void);
 
 int main(void)
 {
@@ -33,10 +27,7 @@ int main(void)
   SystemClock_Config();
 
   MX_GPIO_Init();
-  MX_SPI4_Init();
-  MX_SPI5_Init();
   MX_CRC_Init();
-  MX_SPI6_Init();
 
   setup();
   loop();
@@ -142,126 +133,6 @@ static void MX_CRC_Init(void)
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI4_Init(void)
-{
-
-  /* USER CODE BEGIN SPI4_Init 0 */
-
-  /* USER CODE END SPI4_Init 0 */
-
-  /* USER CODE BEGIN SPI4_Init 1 */
-
-  /* USER CODE END SPI4_Init 1 */
-  /* SPI4 parameter configuration*/
-  hspi4.Instance = SPI4;
-  hspi4.Init.Mode = SPI_MODE_MASTER;
-  hspi4.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi4.Init.DataSize = SPI_DATASIZE_4BIT;
-  hspi4.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi4.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi4.Init.NSS = SPI_NSS_SOFT;
-  hspi4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi4.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi4.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi4.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi4.Init.CRCPolynomial = 7;
-  hspi4.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi4.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
-  if (HAL_SPI_Init(&hspi4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI4_Init 2 */
-
-  /* USER CODE END SPI4_Init 2 */
-
-}
-
-/**
-  * @brief SPI5 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI5_Init(void)
-{
-
-  /* USER CODE BEGIN SPI5_Init 0 */
-
-  /* USER CODE END SPI5_Init 0 */
-
-  /* USER CODE BEGIN SPI5_Init 1 */
-
-  /* USER CODE END SPI5_Init 1 */
-  /* SPI5 parameter configuration*/
-  hspi5.Instance = SPI5;
-  hspi5.Init.Mode = SPI_MODE_MASTER;
-  hspi5.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi5.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi5.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi5.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi5.Init.NSS = SPI_NSS_SOFT;
-  hspi5.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi5.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi5.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi5.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi5.Init.CRCPolynomial = 7;
-  hspi5.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi5.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
-  if (HAL_SPI_Init(&hspi5) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI5_Init 2 */
-
-  /* USER CODE END SPI5_Init 2 */
-
-}
-
-/**
-  * @brief SPI6 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI6_Init(void)
-{
-
-  /* USER CODE BEGIN SPI6_Init 0 */
-
-  /* USER CODE END SPI6_Init 0 */
-
-  /* USER CODE BEGIN SPI6_Init 1 */
-
-  /* USER CODE END SPI6_Init 1 */
-  /* SPI6 parameter configuration*/
-  hspi6.Instance = SPI6;
-  hspi6.Init.Mode = SPI_MODE_MASTER;
-  hspi6.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi6.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi6.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi6.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi6.Init.NSS = SPI_NSS_SOFT;
-  hspi6.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi6.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi6.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi6.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi6.Init.CRCPolynomial = 7;
-  hspi6.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi6.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
-  if (HAL_SPI_Init(&hspi6) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI6_Init 2 */
-
-  /* USER CODE END SPI6_Init 2 */
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -286,7 +157,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOG, LCD_DC_Pin|DRV_X_EN_Pin|DRV_Y_EN_Pin|USB_VBUS_Pin 
-                          |DRV_Y_CS_Pin|TOUCH_CS_Pin|DRV_X_STEP_Pin, GPIO_PIN_RESET);
+                          |DRV_Y_CS_Pin|FLASH_CS_Pin|DRV_X_STEP_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, DRV_E0_DIR_Pin|DRV_Z1_DIR_Pin|DRV_Z1_STEP_Pin|DRV_Z2_CS_Pin 
@@ -340,8 +211,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : X_MIN_Pin BTN_RT_Pin TOUCH_IRQ_Pin */
-  GPIO_InitStruct.Pin = X_MIN_Pin|BTN_RT_Pin|TOUCH_IRQ_Pin;
+  /*Configure GPIO pins : X_MIN_Pin BTN_RT_Pin */
+  GPIO_InitStruct.Pin = X_MIN_Pin|BTN_RT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
@@ -373,8 +244,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : USB_VBUS_Pin TOUCH_CS_Pin DRV_X_STEP_Pin */
-  GPIO_InitStruct.Pin = USB_VBUS_Pin|TOUCH_CS_Pin|DRV_X_STEP_Pin;
+  /*Configure GPIO pins : USB_VBUS_Pin FLASH_CS_Pin DRV_X_STEP_Pin */
+  GPIO_InitStruct.Pin = USB_VBUS_Pin|FLASH_CS_Pin|DRV_X_STEP_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
